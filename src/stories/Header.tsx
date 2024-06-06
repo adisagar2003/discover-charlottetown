@@ -1,5 +1,9 @@
 import React from 'react'
 import { User } from '../models/user.model'
+import './public/index.css'
+import MapImage from "./assets/peimap.svg";
+import UserImage from "./assets/sampleuser.jpg";
+import { BsChevronDown } from "react-icons/bs";
 
 // 
 interface HeaderProps {
@@ -7,9 +11,27 @@ interface HeaderProps {
     userProfileData?: User
 }
 
-function Header({isLoggedIn}: HeaderProps) {
+function Header({isLoggedIn, userProfileData}: HeaderProps) {
   return (
-    <div>Header</div>
+    <div className='navbar'>
+        <div className="navbar-logo">
+            <img src={MapImage} alt="map of prince edward island"/>
+        </div>
+        <div className="navbar-links">
+            <a href="" className="navbar-links__link">Login</a>
+            <a href="" className="navbar-links__link">Logout</a>
+            <a href="" className="navbar-links__link">Register</a>
+        </div>
+        {isLoggedIn && 
+        <div className="navbar-user">
+            <div className="navbar-user__profile">
+                <img src={UserImage} alt=""  />
+                <span>{userProfileData?.username}</span>
+                <span><BsChevronDown /></span>
+            </div>
+        </div>
+        }
+    </div>
   )
 }
 

@@ -1,0 +1,20 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.navbar {
+    height: 50px;
+    background-color: #f1f1f1;
+    box-shadow: 1px 3px 12px black;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-user__profile  img {
+    width: 100px;
+    height: 10%;
+}
