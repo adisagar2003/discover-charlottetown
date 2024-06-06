@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import Header from './Header';
 
 const meta = {
@@ -14,7 +13,12 @@ type Story = StoryObj<typeof meta>;
 
 export const LoggedIn: Story = {
     args: {
-        isLoggedIn: true
+        isLoggedIn: true,
+        userProfileData: {
+            username: 'John',
+            profilePicture: '',
+            progress: 14
+        }
     }
 }
 

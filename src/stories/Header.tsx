@@ -25,9 +25,9 @@ function Header({isLoggedIn, userProfileData}: HeaderProps) {
         {isLoggedIn && 
         <div className="navbar-user">
             <div className="navbar-user__profile">
-                <img src={UserImage} alt=""  />
+                <img className='navbar-user__image' src={UserImage} alt=""  />
                 <span>{userProfileData?.username}</span>
-                <span><BsChevronDown /></span>
+                <BsChevronDown />
             </div>
         </div>
         }

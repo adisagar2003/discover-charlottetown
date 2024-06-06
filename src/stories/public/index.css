@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    font-family: sans-serif;
 }
 
 .navbar {
@@ -12,9 +13,39 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 4px 0px;
 }
 
-.navbar-user__profile  img {
-    width: 100px;
-    height: 10%;
+.navbar-logo >img{
+    height: 100%;
+    width: 80px;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar-links > a {
+    text-decoration: none;
+    font-weight: 600;
+    font-family: sans-serif;
+    color: #181818;
+}
+
+.navbar-user__profile {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.navbar-user__image {
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.navbar-user__profile > span {
+    font-weight: 600;
 }
