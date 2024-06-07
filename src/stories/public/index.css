@@ -8,7 +8,6 @@
     height: 50px;
     background-color: #f1f1f1;
     box-shadow: 1px 3px 12px black;
-    overflow: hidden;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -42,10 +41,18 @@
     color: #181818;
 }
 
+.navbar-user {
+    position: relative;
+}
+
+.navbar-user__wrapper {
+}
+
 .navbar-user__profile {
     display: flex;
     align-items: center;
     gap: 4px;
+    padding: 4px 6px;
 }
 
 .navbar-user__image {
@@ -57,4 +64,80 @@
 
 .navbar-user__profile > span {
     font-weight: 600;
+}
+
+.navbar-responsive {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    display: none;
+}
+
+.navbar-user__profile:hover {
+    background-color: #cacaca;
+    border-radius: 4px;
+    position: relative;
+}
+
+.navbar-user__dropdown {
+    width: 120px;
+    height: 0px;
+    background-color: red;
+    border-radius: 4px;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    transition: 1s;
+    top: 60px;
+    left: 0px;
+}
+
+.navbar-user:hover .navbar-user__dropdown{
+    display: block;
+    height: 100px;
+    transition: 1s;
+}
+
+.navbar-user__dropdown-triangle {
+    background-color: red;
+    min-width: 10px;
+    display: none;
+    min-height: 10px;
+    transform: rotate(45deg);
+    top: 55px;
+    position: absolute;
+}
+
+.navbar-user__dropdown::before {
+    content:'';
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: blue;
+    
+}
+
+.navbar-user__dropdown-triangle:hover {
+
+}
+/* Responsive navbar code */
+
+@media screen and (max-width: 600px) {
+
+    .navbar-responsive {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+    }   
+
+    .navbar-user__dropdown {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background-color: red;
+        bottom: -35px;
+        display: flex;
+    }
 }
