@@ -16,6 +16,15 @@
     padding: 4px 0px;
 }
 
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    width: 100%;
+    margin: auto;
+}
+
 .navbar-logo >img{
     height: 100%;
     width: 80px;
