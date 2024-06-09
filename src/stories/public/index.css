@@ -117,7 +117,6 @@
     transition: .2s;
 }
 
-
 .navbar-user__dropdown::after {
     display: none;
     content:''; /* Required to display content */
@@ -143,8 +142,6 @@
     transition: 1s;
     padding: 10px 5px;
     top: 50px;
-
-
 }
 
 .navbar-user:hover .navbar-user__dropdown::after {
@@ -156,10 +153,6 @@
 }
 
 .navbar-user__invisible-wrapper {
-
-}
-
-.navbar-user__invisible-wrapper {
     display: none;
     position: absolute;
     width: 200px;
@@ -168,6 +161,7 @@
     background-color: none;
     z-index: 0;
 }
+
 /* Responsive navbar code */
 
 @media screen and (max-width: 600px) {
