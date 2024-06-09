@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { User } from '../models/user.model'
 import './public/index.css'
 import MapImage from "./assets/peimap.svg";
@@ -12,11 +11,9 @@ interface HeaderProps {
     userProfileData?: User
 }
 
-
 function Header({isLoggedIn, userProfileData}: HeaderProps) {
 
-  //for controlling the navbar-user section dropdown  
-
+  //for controlling the navbar-user section dropdown
   return (
     <div className='navbar'>
         <div className="navbar-content">
@@ -28,7 +25,6 @@ function Header({isLoggedIn, userProfileData}: HeaderProps) {
                 <a href="" className="navbar-links__link">Logout</a>
                 <a href="" className="navbar-links__link">Register</a>
             </div>
-
             {!isLoggedIn && 
             <div className="navbar-responsive">
                 <BsJustify />
