@@ -4,10 +4,6 @@
     font-family: sans-serif;
 }
 
-body {
-    height: 100%;
-}
-
 .navbar {
     height: 50px;
     background-color: #f1f1f1;
@@ -186,5 +182,4 @@ body {
     background-color: #740e0e;
     position: -webkit-sticky;
     position: sticky;
-
 }
