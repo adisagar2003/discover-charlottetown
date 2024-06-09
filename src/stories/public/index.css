@@ -175,3 +175,11 @@
     }   
 
 }
+
+/* Sidebar starts here */
+
+.sidebar {
+    background-color: #740e0e;
+    position: -webkit-sticky;
+    position: sticky;
+}
