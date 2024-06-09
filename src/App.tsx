@@ -25,7 +25,7 @@ function App() : JSX.Element {
         defaultZoom={3}
         gestureHandling={'greedy'}
         disableDefaultUI={true}
-          />
+        />
       </APIProvider>
     </>
   )
