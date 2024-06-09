@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1400px;
+    max-width: 1200px;
     width: 100%;
     margin: auto;
 }
@@ -45,14 +45,12 @@
     position: relative;
 }
 
-.navbar-user__wrapper {
-}
-
 .navbar-user__profile {
     display: flex;
     align-items: center;
     gap: 4px;
     padding: 4px 6px;
+    width: fit-content;
 }
 
 .navbar-user__image {
@@ -80,46 +78,90 @@
 }
 
 .navbar-user__dropdown {
-    width: 120px;
+    min-width: 150px;
+    position: absolute;
+    background-color: rgb(240, 240, 240);
+    color: #00000000;
+    bottom: -120px;
+    border-radius: 5px;
+    box-shadow: 1px 4px 20px black;
     height: 0px;
-    background-color: red;
-    border-radius: 4px;
-    position: absolute;
-    display: block;
-    overflow: hidden;
-    transition: 1s;
-    top: 60px;
-    left: 0px;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    float: top;
 }
 
-.navbar-user:hover .navbar-user__dropdown{
-    display: block;
-    height: 100px;
-    transition: 1s;
+.navbar-user__dropdown-element {
+    color: inherit;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: .9s;
 }
 
-.navbar-user__dropdown-triangle {
-    background-color: red;
-    min-width: 10px;
+.navbar-user__dropdown-element:hover {
+    background-color: rgb(216, 216, 216);
+    transition: .4s;
+    cursor: pointer;
+}
+
+.navbar-user__dropdown-element > svg {
+    background-color: rgb(220, 220, 220);
+    border-radius: 20px;
+    padding: 10px;
+    transition: .2s;
+}
+
+.navbar-user__dropdown::after {
     display: none;
-    min-height: 10px;
-    transform: rotate(45deg);
-    top: 55px;
+    content:''; /* Required to display content */
+    position: absolute; /* Sets the position absolute to the top div */
+    top: 4%;
+    left: 15%;/* position the little arrow */
+    margin-left: -15px;
+	margin-top:-15px; /* Set margin equal to border px */
+    width: 0;
+    z-index:1;
+    height: 0;
+    border-bottom: solid 15px rgb(240, 240, 240); /* Creates the arrow pointing up, to change to a notch instead user border-top */
+    border-left: solid 15px transparent; /* Creates triangle effect */
+    border-right: solid 15px transparent; /* Creates triangle effect */
+    transition: 1s;
+}
+
+/* when user is hovered, we need to make the dropdown after visible and change the height of the dropdown to auto */
+.navbar-user:hover .navbar-user__dropdown {
+    height: 200px;
+    color: black;
+    opacity: 1;
+    transition: 1s;
+    padding: 10px 5px;
+    top: 50px;
+}
+
+.navbar-user:hover .navbar-user__dropdown::after {
+    display: block;
+}
+
+.navbar-user:hover .navbar-user__invisible-wrapper {
+    display: block;
+}
+
+.navbar-user__invisible-wrapper {
+    display: none;
     position: absolute;
+    width: 200px;
+    right: 20px;
+    height: 300px;
+    background-color: none;
+    z-index: 0;
 }
 
-.navbar-user__dropdown::before {
-    content:'';
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: blue;
-    
-}
-
-.navbar-user__dropdown-triangle:hover {
-
-}
 /* Responsive navbar code */
 
 @media screen and (max-width: 600px) {
@@ -132,12 +174,4 @@
         display: none;
     }   
 
-    .navbar-user__dropdown {
-        width: 100px;
-        height: 100px;
-        position: absolute;
-        background-color: red;
-        bottom: -35px;
-        display: flex;
-    }
 }
