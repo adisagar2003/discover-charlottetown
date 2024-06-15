@@ -5,7 +5,7 @@
 }
 
 .navbar {
-    height: auto;
+    height: 60px;
     background-color: #f1f1f1;
     box-shadow: 1px 3px 12px black;
     position: relative;
@@ -13,6 +13,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 4px 0px;
+    grid-column: 1/4;
 }
 
 .navbar-content {

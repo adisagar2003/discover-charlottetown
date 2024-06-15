@@ -18,9 +18,7 @@ function App() : JSX.Element {
     <>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <div className="main">
-            <div className="header">
-                <Header isLoggedIn={true} />
-            </div>  
+            <Header isLoggedIn={true} />  
             <div className="sidebar">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam cupiditate incidunt repudiandae doloremque aliquam facere! Placeat esse quo et vero vitae voluptas?
             </div>
