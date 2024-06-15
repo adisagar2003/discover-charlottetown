@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+:root {
+    --wrapper-width: 1200px;
+}
+
 #root {
     background-color: red;
     height: 100vh;
