@@ -1,5 +1,7 @@
+import React from 'react';
 import './App.css'
 import Header from './stories/Header'
+import MapComponent from './stories/MapComponent';
 import Sidebar from './stories/Sidebar'
 import {APIProvider} from '@vis.gl/react-google-maps';
 import {Map, MapCameraChangedEvent} from '@vis.gl/react-google-maps';
@@ -14,18 +16,19 @@ function App() : JSX.Element {
 
   return (
     <>
-     <APIProvider apiKey={apiKey} onLoad={() => console.log('Maps API has loaded.')}>
-        <Header isLoggedIn={true} userProfileData={{username: "ad", profilePicture: "", progress: 32}} />
-        <div className="sidebar-container">
-            <Sidebar />     
-        </div>
-        <Map
-        style={{width: '100vw', height: '100vh'}}
-        defaultCenter={{lat: 22.54992, lng: 0}}
-        defaultZoom={3}
-        gestureHandling={'greedy'}
-        disableDefaultUI={true}
-        />
+      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+          <div className="main">
+            <div className="header">
+                <Header isLoggedIn={true} />
+            </div>  
+            <div className="sidebar">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam cupiditate incidunt repudiandae doloremque aliquam facere! Placeat esse quo et vero vitae voluptas?
+            </div>
+            <div className="map-content">
+              <MapComponent />
+            </div>
+          </div>
+          
       </APIProvider>
     </>
   )

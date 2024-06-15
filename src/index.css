@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    background-color: red;
+    height: 100vh;
+}
+
+#root > div.main {
+    background-color: blue;
+    height: 100%;
+}

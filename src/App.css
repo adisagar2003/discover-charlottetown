@@ -1,0 +1,15 @@
+.main {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+}
+
+.header {
+    grid-column: 1/3;
+}
+
+.sidebar {
+    width: 50%;
+    background-color: green;
+
+}
