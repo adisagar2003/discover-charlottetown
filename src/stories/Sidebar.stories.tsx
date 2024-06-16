@@ -9,8 +9,20 @@ const meta: Meta<typeof Sidebar> = {
 export default meta;
 type Story = StoryObj<typeof Sidebar>;
 
-export const Primary: Story = {
+export const NotLoggedIn: Story = {
   args: {
-    
+    isLoggedIn: true,
+    userProfile: {
+      username: 'John',
+      profilePicture: '',
+      progress: 14,
+      email: 'john@gmail.com'
+  }
   },
 };
+
+export const LoggedOut: Story = {
+  args: {
+    isLoggedIn: false
+  }
+}

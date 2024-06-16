@@ -1,9 +1,57 @@
+import { MdHome, MdOutlineGraphicEq } from 'react-icons/md';
+import { User } from '../models/user.model';
 import './public/index.css';
+import { RiProgress2Line, RiProgress3Line } from 'react-icons/ri';
 
-function Sidebar() {
+type SidebarProps = {
+  isLoggedIn: boolean,
+  userProfile: User
+}
+
+function Sidebar(Props:SidebarProps) {
   return (
     <div className="sidebar">
-        as
+      <div className="sidebar-content">
+        <div className='sidebar-content__user'>
+          <div className='sidebar-content__profile-picture'>
+              <img src={Props.userProfile.profilePicture} />
+          </div>
+          <div className='sidebar-content__username-email'>
+              <h2>
+                {Props.userProfile.username}
+              </h2>
+              <span>
+                {Props.userProfile.email}
+              </span>
+          </div>
+        </div>
+        <div className='sidebar-content__links'>
+            <div className=''>
+              <div className="sidebar-icon">
+                <MdHome />
+              </div>
+              <div className="sidebar-link__text">
+                Dashboard
+              </div>
+            </div>
+            <div>
+              <div className="sidebar-icon">
+                <RiProgress3Line />
+              </div>
+              <div className="sidebar-link__text">
+                Progress
+              </div>
+            </div>
+            <div>
+              <div className="sidebar-icon">
+                <MdHome />
+              </div>
+              <div className="sidebar-link__text">
+                Dashboard
+              </div>
+            </div>
+        </div>
+      </div>
     </div>
   )
 }
