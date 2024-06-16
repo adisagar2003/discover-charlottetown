@@ -1,4 +1,4 @@
-import { MdHome, MdOutlineGraphicEq } from 'react-icons/md';
+import { MdHome, MdOutlineGraphicEq, MdSearch } from 'react-icons/md';
 import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress2Line, RiProgress3Line } from 'react-icons/ri';
@@ -12,6 +12,9 @@ function Sidebar(Props:SidebarProps) {
   return (
     <div className="sidebar">
       <div className="sidebar-content">
+        <div className="sidebar-logo">
+          <img src={"/ctown-logo.png"} alt="" />
+        </div>
         <div className='sidebar-content__user'>
           <div className='sidebar-content__profile-picture'>
               <img src={Props.userProfile.profilePicture} />
@@ -44,10 +47,10 @@ function Sidebar(Props:SidebarProps) {
             </div>
             <div>
               <div className="sidebar-icon">
-                <MdHome />
+                <MdSearch />
               </div>
               <div className="sidebar-link__text">
-                Dashboard
+                Browse
               </div>
             </div>
         </div>
