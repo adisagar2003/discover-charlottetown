@@ -17,7 +17,8 @@ export const LoggedIn: Story = {
         userProfileData: {
             username: 'John',
             profilePicture: '',
-            progress: 14
+            progress: 14,
+            email:'john@gmail.com'
         }
     }
 }

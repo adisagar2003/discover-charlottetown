@@ -178,3 +178,95 @@
 }
 
 /* Sidebar starts here */
+
+
+/* End of sidebar */
+
+/* Start of map-layout */
+
+.map-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(238, 238, 238);
+    height: 100%;
+}
+
+.map {
+    transform: scale(1);
+}
+
+.sidebar {
+    background-color: rgb(226, 241, 250);
+    min-height: 100%;
+    width: 100%;
+
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.sidebar-content__user {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-content__profile-picture {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.116);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-content__profile-picture img {
+    width: 60px;
+    height: 60px;
+}
+
+.sidebar-content__username-email {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 10px;
+}
+
+.sidebar-content__links {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.sidebar-content__links > div {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    width: 130px;
+}
+
+.sidebar-content__links > div:hover {
+    background-color: #1818183d;
+    cursor: pointer;
+}
+
+.sidebar-content__links > div:hover svg {
+    color: rgb(21, 20, 88);
+}
+
+.sidebar-icon {
+    color: rgba(0, 0, 0, 0.247);
+}
+
+.sidebar-link__text {
+    font-weight: 700;
+}

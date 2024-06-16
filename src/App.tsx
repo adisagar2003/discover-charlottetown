@@ -19,9 +19,7 @@ function App() : JSX.Element {
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <div className="main">
             <Header isLoggedIn={true} />  
-            <div className="sidebar">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laboriosam cupiditate incidunt repudiandae doloremque aliquam facere! Placeat esse quo et vero vitae voluptas?
-            </div>
+            <Sidebar isLoggedIn={true} userProfile={{username: 'John', profilePicture:'https://assets.pokemon.com/assets/cms2/img/pokedex/full//610.png', email: 'john@gmail.com', progress:12}}/>
             <div className="map-content">
               <MapComponent />
             </div>
