@@ -4,8 +4,8 @@ export default function MapComponent() {
   return (
     <div className='map-layout'>
         <div className='map'>
-          <Map
-          style={{width: '600px', height: '400px'}}
+        <Map
+          style={{width: '900px', height: '500px'}}
           defaultCenter={{lat: 46.23472677168374, lng: -63.134519289778176}}
           defaultZoom={15}
           gestureHandling={'greedy'}

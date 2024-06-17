@@ -20,11 +20,13 @@ function Header({isLoggedIn, userProfileData}: HeaderProps) {
             <div className="navbar-logo">
                 <img src={MapImage} alt="map of prince edward island"/>
             </div>
-            <div className="navbar-links">
+            {!isLoggedIn && (
+                <div className="navbar-links">
                 <a href="" className="navbar-links__link">Login</a>
                 <a href="" className="navbar-links__link">Logout</a>
                 <a href="" className="navbar-links__link">Register</a>
             </div>
+            )}
             {!isLoggedIn && 
             <div className="navbar-responsive">
                 <BsJustify />

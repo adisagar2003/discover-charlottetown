@@ -15,4 +15,5 @@
 #root > div.main {
     background-color: blue;
     height: 100%;
+    width: 100%;
 }

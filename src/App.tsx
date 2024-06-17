@@ -1,10 +1,9 @@
-import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
-import Header from './stories/Header'
+import HomePage from './pages/home.page';
 import MapComponent from './stories/MapComponent';
 import Sidebar from './stories/Sidebar'
 import {APIProvider} from '@vis.gl/react-google-maps';
-import {Map, MapCameraChangedEvent} from '@vis.gl/react-google-maps';
 
 function App() : JSX.Element {
 
@@ -17,14 +16,11 @@ function App() : JSX.Element {
   return (
     <>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-          <div className="main">
-            <Header isLoggedIn={true} />  
-            <Sidebar isLoggedIn={true} userProfile={{username: 'John', profilePicture:'https://assets.pokemon.com/assets/cms2/img/pokedex/full//610.png', email: 'john@gmail.com', progress:12}}/>
-            <div className="map-content">
-              <MapComponent />
-            </div>
-          </div>
-          
+          <BrowserRouter>
+            <Routes>
+              <Route element={<HomePage />} path="/" />
+            </Routes>
+          </BrowserRouter>
       </APIProvider>
     </>
   )
