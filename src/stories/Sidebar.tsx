@@ -1,11 +1,12 @@
-import { MdHome, MdOutlineGraphicEq, MdSearch } from 'react-icons/md';
+import { MdHome, MdNotifications, MdSearch } from 'react-icons/md';
 import { User } from '../models/user.model';
 import './public/index.css';
-import { RiProgress2Line, RiProgress3Line } from 'react-icons/ri';
+import { RiProgress3Line } from 'react-icons/ri';
 
 type SidebarProps = {
   isLoggedIn: boolean,
-  userProfile: User
+  userProfile: User,
+  notificationCount: number
 }
 
 function Sidebar(Props:SidebarProps) {
@@ -51,6 +52,15 @@ function Sidebar(Props:SidebarProps) {
               </div>
               <div className="sidebar-link__text">
                 Browse
+              </div>
+            </div>
+            <div>
+              <div className="sidebar-icon notification">
+                <div className="sidebar-notification-number">{Props.notificationCount}</div>
+                <MdNotifications />
+              </div>
+              <div className="sidebar-link__text">
+                Notifications
               </div>
             </div>
         </div>

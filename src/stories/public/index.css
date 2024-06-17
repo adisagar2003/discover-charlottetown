@@ -243,11 +243,30 @@
 
 .sidebar-icon {
     color: rgba(0, 0, 0, 0.247);
+    position: relative;
 }
 
 .sidebar-link__text {
     font-weight: 700;
 }
+
+.sidebar-notification-number {
+    position: absolute;
+    background-color: blue;
+    color: white;
+    font-weight: 700;
+
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;;
+    left: 4px;
+
+}
+
 /* End of sidebar */
 
 /* Start of map-layout */
