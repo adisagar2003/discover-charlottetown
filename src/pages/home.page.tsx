@@ -9,6 +9,5 @@ export default function HomePage(){
               <MapComponent />
             </div>
           </div>
-
   )
 }
