@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import HomePage from './pages/home.page';
-import MapComponent from './stories/MapComponent';
-import Sidebar from './stories/Sidebar'
 import {APIProvider} from '@vis.gl/react-google-maps';
+import ProgressPage from './pages/progress.page';
+import Sidebar from './stories/Sidebar';
 
 function App() : JSX.Element {
 
@@ -17,9 +17,14 @@ function App() : JSX.Element {
     <>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <BrowserRouter>
-            <Routes>
-              <Route element={<HomePage />} path="/" />
-            </Routes>
+            <div className="main">
+              <Sidebar notificationCount={4} isLoggedIn={true} userProfile={{username: 'John', profilePicture:'https://assets.pokemon.com/assets/cms2/img/pokedex/full//610.png', email: 'john@gmail.com', progress:12}}/>
+              <Routes
+              >
+                  <Route element={<HomePage />} path='/' />
+                  <Route element={<ProgressPage />} path='/progress' />
+              </Routes>
+            </div>
           </BrowserRouter>
       </APIProvider>
     </>
