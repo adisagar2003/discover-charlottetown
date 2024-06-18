@@ -178,6 +178,20 @@
 }
 
 /* Sidebar starts here */
+.sidebar-visible__button {
+    position: absolute;
+    border: none;
+    width: 20px;
+    height: 20px;
+    z-index: 100;
+    top: 10px;
+    left: 10px;
+    color: blue;
+    box-shadow: 1px 1px 10px  black;
+    display: grid;
+    justify-self: center;
+}
+
 .sidebar {
     background-color: rgb(226, 241, 250);
 }
@@ -268,7 +282,61 @@
     left: 4px;
 }
 
+.sidebar-responsive-cancel-button {
+    display: none;
+}
+
+.sidebar.invisible {
+    display: none;
+}
+
+.sidebar-visible__button {
+    display: none;
+}
 /* End of sidebar */
+
+/* Mobile/ Tablet view sidebar */
+
+@media screen and (max-width: 800px) {
+    
+    .sidebar-responsive-cancel-button {
+        display: block;
+    }
+    
+    .sidebar-visible__button {
+        display: block;
+    }
+
+    .sidebar {
+        background-color: rgb(232, 232, 232);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99;
+    }
+
+    .sidebar-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .sidebar-responsive-cancel-button {
+        width: 30px;
+        height: 30px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+}
 
 /* Start of map-layout */
 

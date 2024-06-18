@@ -2,8 +2,7 @@
     display: flex;
     min-width: 70%;
     width: 70%;
-    height: 100%;
-    
+    height: 100%;  
 }
 
 .sidebar {
@@ -26,4 +25,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media screen and (max-width: 800px) {
+
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
 }
