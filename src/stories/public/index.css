@@ -224,15 +224,17 @@
     margin-top: 40px;
 }
 
-.sidebar-content__links > div {
+.sidebar-content__links > a {
     display: flex;
+    text-decoration: none;
+    color: #2f2f2f;
     gap: 15px;
     padding: 10px;
     border-radius: 4px;
     width: 130px;
 }
 
-.sidebar-content__links > div:hover {
+.sidebar-content__links > a:hover {
     background-color: #1818183d;
     cursor: pointer;
 }

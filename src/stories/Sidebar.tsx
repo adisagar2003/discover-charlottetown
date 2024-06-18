@@ -2,6 +2,7 @@ import { MdHome, MdNotifications, MdSearch } from 'react-icons/md';
 import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 type SidebarProps = {
   isLoggedIn: boolean,
@@ -30,31 +31,31 @@ function Sidebar(Props:SidebarProps) {
           </div>
         </div>
         <div className='sidebar-content__links'>
-            <div className=''>
+            <Link to="/" className=''>
               <div className="sidebar-icon">
                 <MdHome />
               </div>
               <div className="sidebar-link__text">
                 Dashboard
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link to="/progress" className=''>
               <div className="sidebar-icon">
                 <RiProgress3Line />
               </div>
               <div className="sidebar-link__text">
                 Progress
               </div>
-            </div>
-            <div>
+            </Link>
+            <Link to="/search">
               <div className="sidebar-icon">
                 <MdSearch />
               </div>
               <div className="sidebar-link__text">
                 Browse
               </div>
-            </div>
-            <div>
+            </Link >
+            <Link to="/notifications">
               <div className="sidebar-icon notification">
                 <div className="sidebar-notification-number">{Props.notificationCount}</div>
                 <MdNotifications />
@@ -62,7 +63,7 @@ function Sidebar(Props:SidebarProps) {
               <div className="sidebar-link__text">
                 Notifications
               </div>
-            </div>
+            </Link>
         </div>
       </div>
     </div>
