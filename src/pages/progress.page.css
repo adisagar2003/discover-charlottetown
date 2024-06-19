@@ -1,0 +1,36 @@
+.progress-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: "piechart linegraph" "recommendation recommendation";
+    background-color: aliceblue;
+}
+
+.progress-linegraphs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.progress-recommendations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    grid-area: "recommendation";
+    grid-column: 1/3;
+    gap: 2px;
+    background-color: red;
+}
+
+.card-container {
+    display: flex;
+    gap: 10px;
+}
+
+.card-image > img {
+    width: 100%;
+    height: 100%;
+}
