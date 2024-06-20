@@ -355,3 +355,50 @@
 .map {
     transform: scale(1);
 }
+
+/* Searchbar starts here */
+.searchbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: rgb(221, 221, 221);
+    padding: 9px;
+}
+
+.searchbar > input {
+    border: none;
+    background-color: inherit;
+    font-weight: 700;
+}
+
+.searchbar > input:focus {
+    outline: none;
+}
+
+.searchbar > svg {
+    color: rgb(220, 220, 220);
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    border-radius: 50px;
+    background-color: rgb(0, 158, 172);
+    box-shadow: 1px 3px 4px black;
+}
+/* End of searchbar*/
+
+/* Notification component starts here */
+.notification-container {
+    width: 50%;
+    height: 40px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    padding-left: 12px;
+    position: relative;
+    border-radius: 4px;    
+}
+/* End of notifications */
