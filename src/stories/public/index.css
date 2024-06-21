@@ -361,7 +361,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 300px;
+    width: 250px;
     border-radius: 10px;
     gap: 10px;
     background-color: rgb(221, 221, 221);
@@ -391,14 +391,54 @@
 
 /* Notification component starts here */
 .notification-container {
-    width: 50%;
-    height: 40px;
-    background-color: red;
+    background-color: rgb(211, 237, 240);
+    padding: 12px;
+    height: auto;
+    width: auto;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.notification-content {
     display: flex;
     align-items: center;
-    padding: 4px;
-    padding-left: 12px;
+    gap: 15px;
     position: relative;
-    border-radius: 4px;    
+    width: 100%;    
+    font-weight: 600;
+}
+
+.notification-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notification-time {
+    opacity: 0.5;
+    font-weight: 600;
+    font-size: 12px;
+
+}
+
+.notification-thumbnail > img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.notification-close {
+    min-width: 25px;
+    min-height: 25px;
+    position: absolute;
+    right: 20px;
+    background-color: rgb(207, 196, 196);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    font-weight: 100;
+    box-shadow: 1px 2px 12px black;
+    align-items: center;
+    color: rgb(54, 54, 54);
+    padding-left: 1px;
 }
 /* End of notifications */
