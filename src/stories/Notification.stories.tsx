@@ -10,8 +10,9 @@ type Story = StoryObj<typeof Notification>;
 
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Notification',
+    time: new Date(),
+    notificationText:'lorem23fj rwqhriuruiwur hh riht rtqrhw req qrieiu riuhr',
+    notificationThumbnail: 'https://mdbcdn.b-cdn.net/img/new/avatars/2.webp'
   },
 };
 
