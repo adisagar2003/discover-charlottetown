@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 type SidebarProps = {
   isLoggedIn: boolean,
-  userProfile: User,
-  notificationCount: number
+  userProfile: User | null,
+  notificationCount: number | null
 }
 
 function Sidebar(Props:SidebarProps) {
