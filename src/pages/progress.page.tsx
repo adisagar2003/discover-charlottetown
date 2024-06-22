@@ -8,18 +8,16 @@ function ProgressPage() {
 
   const data = {
     labels: [
-      'Left to explore',
-      'Blue',
- 
+      'Total places',
     ],
     datasets: [{
-      label: 'Percentage explored',
+      label: 'Total places',
       data: [100,20],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'blue'
       ],
-      hoverOffset: 2
+      hoverOffset: 1
     }]
   };
 

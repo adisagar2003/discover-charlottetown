@@ -5,6 +5,7 @@ import {APIProvider} from '@vis.gl/react-google-maps';
 import ProgressPage from './pages/progress.page';
 import Sidebar from './stories/Sidebar';
 import BrowsePage from './pages/browse.page';
+import NotificationPage from './pages/notification.page';
 
 function App() : JSX.Element {
 
@@ -25,6 +26,7 @@ function App() : JSX.Element {
                   <Route element={<HomePage />} path='/' />
                   <Route element={<ProgressPage />} path='/progress' />
                   <Route element={<BrowsePage />} path='/search' />
+                  <Route element={<NotificationPage />} path='/notifications' />
               </Routes>
             </div>
           </BrowserRouter>
