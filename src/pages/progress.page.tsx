@@ -28,7 +28,7 @@ function ProgressPage() {
           <Pie data={data} />
         </div>
         <div className="progress-linegraphs">
-          <progress max={100} value={70}></progress>
+          <progress max={100} value={50}></progress>
           <progress max={100} value={80}></progress>
           <progress max={100} value={40}></progress>
         </div>
