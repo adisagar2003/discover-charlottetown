@@ -1,4 +1,4 @@
-import { MdArrowBack, MdHome, MdNotifications, MdSearch } from 'react-icons/md';
+import { MdArrowBack, MdCabin, MdHome, MdNotifications, MdPerson, MdPerson2, MdSearch } from 'react-icons/md';
 import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
@@ -71,6 +71,22 @@ function Sidebar(Props:SidebarProps) {
                 </div>
                 <div className="sidebar-link__text">
                   Notifications
+                </div>
+              </Link>
+              <Link to="/login">
+                <div className="sidebar-icon notification">
+                  <MdPerson />
+                </div>
+                <div className="sidebar-link__text">
+                  Login
+                </div>
+              </Link>
+              <Link to="/register">
+                <div className="sidebar-icon notification">
+                  <MdPerson2 />
+                </div>
+                <div className="sidebar-link__text">
+                  Register
                 </div>
               </Link>
           </div>

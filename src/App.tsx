@@ -6,6 +6,8 @@ import ProgressPage from './pages/progress.page';
 import Sidebar from './stories/Sidebar';
 import BrowsePage from './pages/browse.page';
 import NotificationPage from './pages/notification.page';
+import LoginPage from './pages/login.page';
+import RegisterPage from './pages/register.page';
 
 function App() : JSX.Element {
 
@@ -27,6 +29,8 @@ function App() : JSX.Element {
                   <Route element={<ProgressPage />} path='/progress' />
                   <Route element={<BrowsePage />} path='/search' />
                   <Route element={<NotificationPage />} path='/notifications' />
+                  <Route element={<LoginPage />} path='/login' />
+                  <Route element={<RegisterPage />} path='/register' />
               </Routes>
             </div>
           </BrowserRouter>
