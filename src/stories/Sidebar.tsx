@@ -1,4 +1,4 @@
-import { MdArrowBack, MdCabin, MdHome, MdNotifications, MdPerson, MdPerson2, MdSearch } from 'react-icons/md';
+import { MdArrowBack, MdHome, MdNotifications, MdPerson, MdPerson2, MdSearch } from 'react-icons/md';
 import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
@@ -26,7 +26,8 @@ function Sidebar(Props:SidebarProps) {
           <div className="sidebar-logo">
             <img src={"/ctown-logo.png"} alt="" />
           </div>
-          <div className='sidebar-content__user'>
+          {Props.userProfile != null && (
+            <div className='sidebar-content__user'>
             <div className='sidebar-content__profile-picture'>
                 <img src={Props.userProfile.profilePicture} />
             </div>
@@ -39,6 +40,7 @@ function Sidebar(Props:SidebarProps) {
                 </span>
             </div>
           </div>
+          )}
           <div className='sidebar-content__links'>
               <Link to="/" className=''>
                 <div className="sidebar-icon">

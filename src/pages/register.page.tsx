@@ -15,7 +15,7 @@ export default function RegisterPage() {
                 <input accept=".png,.jpg,.jpeg" type="file" name="profilePicture" id="" placeholder="password" />
             </div>
             <button className="login-button">
-                Login
+                Login 
             </button>
         </div>
     </div>
