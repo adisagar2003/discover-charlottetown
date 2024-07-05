@@ -1,4 +1,3 @@
-import { MdCancel } from "react-icons/md";
 import "./../stories/public/index.css";
 import { RxCross2 } from "react-icons/rx";
 
