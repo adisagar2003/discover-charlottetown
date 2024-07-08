@@ -22,7 +22,7 @@ function App() : JSX.Element {
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <BrowserRouter>
             <div className="main">
-              <Sidebar notificationCount={4} isLoggedIn={true} userProfile={{username: 'John', profilePicture:'https://assets.pokemon.com/assets/cms2/img/pokedex/full//610.png', email: 'john@gmail.com', progress:12}}/>
+              <Sidebar notificationCount={4} isLoggedIn={true} />
               <Routes
               >
                   <Route element={<HomePage />} path='/' />

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type SidebarProps = {
   isLoggedIn: boolean,
-  userProfile: User | null,
+  userProfile?: User | null,
   notificationCount: number | null
 }
 
@@ -66,7 +66,7 @@ function Sidebar(Props:SidebarProps) {
                   Browse
                 </div>
               </Link >
-              <Link to="/notifications">
+              {Props.userProfile && <Link to="/notifications">
                 <div className="sidebar-icon notification">
                   <div className="sidebar-notification-number">{Props.notificationCount}</div>
                   <MdNotifications />
@@ -74,7 +74,10 @@ function Sidebar(Props:SidebarProps) {
                 <div className="sidebar-link__text">
                   Notifications
                 </div>
-              </Link>
+              </Link>}
+              { Props.userProfile == null &&
+               <>
+               
               <Link to="/login">
                 <div className="sidebar-icon notification">
                   <MdPerson />
@@ -91,6 +94,8 @@ function Sidebar(Props:SidebarProps) {
                   Register
                 </div>
               </Link>
+              </>
+              }
           </div>
         </div>
       </div>
