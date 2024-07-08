@@ -18,7 +18,7 @@ function App() : JSX.Element {
   }
 
   return (
-    <>
+    <> 
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <BrowserRouter>
             <div className="main">
