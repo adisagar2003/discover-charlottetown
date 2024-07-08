@@ -8,6 +8,7 @@ import BrowsePage from './pages/browse.page';
 import NotificationPage from './pages/notification.page';
 import LoginPage from './pages/login.page';
 import RegisterPage from './pages/register.page';
+import AuthContext from './context/auth.context';
 
 function App() : JSX.Element {
 
@@ -17,24 +18,27 @@ function App() : JSX.Element {
     apiKey="";
   }
 
+  
   return (
     <> 
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-          <BrowserRouter>
-            <div className="main">
-              <Sidebar notificationCount={4} isLoggedIn={true} />
-              <Routes
-              >
-                  <Route element={<HomePage />} path='/' />
-                  <Route element={<ProgressPage />} path='/progress' />
-                  <Route element={<BrowsePage />} path='/search' />
-                  <Route element={<NotificationPage />} path='/notifications' />
-                  <Route element={<LoginPage />} path='/login' />
-                  <Route element={<RegisterPage />} path='/register' />
-              </Routes>
-            </div>
-          </BrowserRouter>
-      </APIProvider>
+      <AuthContext.Provider value={null}>
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+            <BrowserRouter>
+              <div className="main">
+                <Sidebar notificationCount={4} isLoggedIn={true} />
+                <Routes
+                >
+                    <Route element={<HomePage />} path='/' />
+                    <Route element={<ProgressPage />} path='/progress' />
+                    <Route element={<BrowsePage />} path='/search' />
+                    <Route element={<NotificationPage />} path='/notifications' />
+                    <Route element={<LoginPage />} path='/login' />
+                    <Route element={<RegisterPage />} path='/register' />
+                </Routes>
+              </div>
+            </BrowserRouter>
+        </APIProvider>
+      </AuthContext.Provider>
     </>
   )
 }
