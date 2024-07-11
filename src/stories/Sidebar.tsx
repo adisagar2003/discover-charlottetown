@@ -3,7 +3,8 @@ import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../context/store';
 
 type SidebarProps = {
   isLoggedIn: boolean,
@@ -12,9 +13,12 @@ type SidebarProps = {
 }
 
 function Sidebar(Props:SidebarProps) {
-  
+  const userData = useAppSelector((state)=>state.value);
   const [sidebarResponsiveVisible, setSidebarResponsiveVisible] = useState<boolean>(true);
 
+  useEffect(()=>{
+    console.log({userData});
+  },[]);
   return (
     <>
         {!sidebarResponsiveVisible && <button className='sidebar-visible__button' onClick={()=> setSidebarResponsiveVisible(true)}><MdArrowBack /></button>}
