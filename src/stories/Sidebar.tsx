@@ -1,24 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MdArrowBack, MdHome, MdNotifications, MdPerson, MdPerson2, MdSearch } from 'react-icons/md';
-import { User } from '../models/user.model';
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../context/store';
+import { useState } from 'react';
+import { logout, useAppSelector } from '../context/store';
+import { useDispatch } from 'react-redux';
 
-type SidebarProps = {
-  isLoggedIn: boolean,
-  userProfile?: User | null,
-  notificationCount: number | null
-}
-
-function Sidebar(Props:SidebarProps) {
-  const userData = useAppSelector((state)=>state.value);
+function Sidebar() {
+  const userData:(any) = useAppSelector((state )=>state.value);
+  const dispatch = useDispatch()
   const [sidebarResponsiveVisible, setSidebarResponsiveVisible] = useState<boolean>(true);
 
-  useEffect(()=>{
-    console.log({userData});
-  },[]);
   return (
     <>
         {!sidebarResponsiveVisible && <button className='sidebar-visible__button' onClick={()=> setSidebarResponsiveVisible(true)}><MdArrowBack /></button>}
@@ -30,21 +23,23 @@ function Sidebar(Props:SidebarProps) {
           <div className="sidebar-logo">
             <img src={"/ctown-logo.png"} alt="" />
           </div>
-          {Props.userProfile != null && (
+          {(userData != null &&(
+           
             <div className='sidebar-content__user'>
             <div className='sidebar-content__profile-picture'>
-                <img src={Props.userProfile.profilePicture} />
+                <img src={""} />
             </div>
             <div className='sidebar-content__username-email'>
+              
                 <h2>
-                  {Props.userProfile.username}
+                  {userData.user.username}
                 </h2>
                 <span>
-                  {Props.userProfile.email}
+                  {userData.user.email}
                 </span>
             </div>
           </div>
-          )}
+          ))}
           <div className='sidebar-content__links'>
               <Link to="/" className=''>
                 <div className="sidebar-icon">
@@ -70,34 +65,35 @@ function Sidebar(Props:SidebarProps) {
                   Browse
                 </div>
               </Link >
-              {Props.userProfile && <Link to="/notifications">
+              {userData && <Link to="/notifications">
                 <div className="sidebar-icon notification">
-                  <div className="sidebar-notification-number">{Props.notificationCount}</div>
+                  <div className="sidebar-notification-number">{0}</div>
                   <MdNotifications />
                 </div>
                 <div className="sidebar-link__text">
                   Notifications
                 </div>
               </Link>}
-              { Props.userProfile == null &&
+              { userData == null ?
                <>
-               
-              <Link to="/login">
-                <div className="sidebar-icon notification">
-                  <MdPerson />
-                </div>
-                <div className="sidebar-link__text">
-                  Login
-                </div>
-              </Link>
-              <Link to="/register">
-                <div className="sidebar-icon notification">
-                  <MdPerson2 />
-                </div>
-                <div className="sidebar-link__text">
-                  Register
-                </div>
-              </Link>
+                <Link to="/login">
+                  <div className="sidebar-icon notification">
+                    <MdPerson />
+                  </div>
+                  <div className="sidebar-link__text">
+                    Login
+                  </div>
+                </Link>
+                <Link to="/register">
+                  <div className="sidebar-icon notification">
+                    <MdPerson2 />
+                  </div>
+                  <div className="sidebar-link__text">
+                    Register
+                  </div>
+                </Link>
+              </> : <>
+                <button onClick={()=>dispatch(logout())} className="sidebar-logout__button">Logout</button>
               </>
               }
           </div>
