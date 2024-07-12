@@ -30,7 +30,6 @@ function LoginPage() {
                 setLoginLoading(false);
                 setData(res.data);
                 dispatch(login(res.data));
-                
                 navigate('/');            
             }).catch(err => {
                 if (err.response.status == 400) {

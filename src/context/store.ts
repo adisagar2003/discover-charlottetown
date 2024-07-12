@@ -28,6 +28,7 @@ const authSlice = createSlice({
         },
         logout: (state) => {
             state.value = null
+            window.location.reload();
         }
     }
 });
