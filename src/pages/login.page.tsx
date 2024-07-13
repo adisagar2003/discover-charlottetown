@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./login.page.css";
 import { FadeLoader } from "react-spinners";
 import api from "../utils/api";
@@ -12,14 +12,9 @@ function LoginPage() {
   const [loading, setLoginLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [data, setData] = useState<object>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // login using api
-  
-  useEffect(()=> {
-    console.log(data);
-  }, [data])
   const loginUser = () => {
         if (username!= "" || password != "") {
             setLoginLoading(true);
@@ -28,7 +23,6 @@ function LoginPage() {
                 "password": password
             }).then((res)=>{
                 setLoginLoading(false);
-                setData(res.data);
                 dispatch(login(res.data));
                 navigate('/');            
             }).catch(err => {
