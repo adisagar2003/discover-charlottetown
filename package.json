@@ -12,6 +12,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@reduxjs/toolkit": "^2.2.6",
     "@types/axios": "^0.14.0",
     "@types/react-redux": "^7.1.33",
