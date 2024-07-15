@@ -14,6 +14,7 @@ export default function BrowsePage() {
                 <SkeletonTheme duration={1} height={20} baseColor="#fff" highlightColor="#999">
                     <Skeleton count={14} />
                 </SkeletonTheme>
+                
             </div>
         </div>
     </div>
