@@ -372,7 +372,7 @@
     border: none;
     background-color: inherit;
     font-weight: 700;
-}
+} 
 
 .searchbar > input:focus {
     outline: none;
@@ -450,14 +450,16 @@
     border-radius: 4px;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    
     align-items: center;
     gap: 20px;
 }
 
 .location-image {
    width: 50%;
-   flex: 0.5;
+   max-width: 50%;
+   min-width: 50%;
+    
 }
 
 .location-image > img {
@@ -469,16 +471,23 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 50%;
+    min-height: 100%;
+    position: relative;
+    word-wrap: break-word;
 }
 
 .location-title {
     font-weight: 700;
     font-size: 24px;
+    width: 100%;
 }
 
 .location-buttons {
     display: flex;
     gap: 10px;
+    position: absolute;
+    bottom: 10px;
 }
 
 .location-likes {
@@ -503,4 +512,13 @@
     padding: 4px;
     outline: none;
     border: none;
+}
+
+.location-desc {
+    width: 90%;
+    margin-top: 10px;
+}
+
+.location-card:hover {
+    
 }
