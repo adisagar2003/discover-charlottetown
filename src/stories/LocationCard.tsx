@@ -20,7 +20,7 @@ export default function LocationCard(Props: LocationCardProps) {
                 {Props.title.length > 10 ? `${Props.title.slice(0,10)}...`:Props.title}
                 </div>
                 <div className="location-desc">
-                    {Props.description.length > 172 ? `${Props.description.slice(0,160)}...`:Props.description}
+                    {Props.description.length > 100 ? `${Props.description.slice(0,100)}...`:Props.description}
                 </div>
             </div>
             <div className="location-buttons">
