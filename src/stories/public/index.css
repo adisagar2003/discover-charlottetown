@@ -271,7 +271,6 @@
     background-color: blue;
     color: white;
     font-weight: 700;
-
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -444,15 +443,15 @@
 /* End of notifications */
 
 .location-card {
-    width: 400px;
+    width: 500px;
     height: 240px;
     background-color: rgb(241, 241, 241);
     border-radius: 4px;
     padding: 10px;
-    display: flex;
-    
+    display: flex; 
     align-items: center;
     gap: 20px;
+    position: relative;
 }
 
 .location-card:hover {
@@ -462,8 +461,7 @@
 .location-image {
    width: 50%;
    max-width: 50%;
-   min-width: 50%;
-    
+min-width: 50%;
 }
 
 .location-image > img {
@@ -525,6 +523,10 @@
 }
 
 .location-desc {
-    width: 90%;
-    margin-top: 10px;
+    
+}
+
+.card-container {
+    margin-left: auto;
+    padding: 4px;
 }

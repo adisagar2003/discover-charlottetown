@@ -1,6 +1,7 @@
 import "./progress.page.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import LocationCard from "../stories/LocationCard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -8,14 +9,14 @@ function ProgressPage() {
 
   const data = {
     labels: [
-      'Total places',
+      'Unexplored areas',
     ],
     datasets: [{
-      label: 'Total places',
-      data: [100,20],
+      label: '',
+      data: [80,20],
       backgroundColor: [
-        'rgb(255, 99, 132)',
-        'blue'
+        'rgb(126, 178, 234)',
+        'rgb(77, 216, 238)'
       ],
       hoverOffset: 1
     }]
@@ -27,41 +28,12 @@ function ProgressPage() {
         <div className="progress-piechart">
           <Pie data={data} />
         </div>
-        <div className="progress-linegraphs">
-          <progress max={100} value={50}></progress>
-          <progress max={100} value={80}></progress>
-          <progress max={100} value={40}></progress>
-        </div>
         <div className="progress-recommendations">
           <h2>Recommendations</h2>
           <div className="card-container">
-            <div className="card">
-              <div className="card-image">
-                <img src="https://www.discovercharlottetown.com/wp/wp-content/uploads/2023/03/24-reasons-to-visit-charlottetown-in-2024.jpg" alt="" />
-              </div>
-              <div className="card-content">
-                <h4>place</h4>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, tenetur rerum ab laudantium pariatur numquam, sapiente a voluptatem est nemo placeat adipisci quo?</span>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-image">
-                <img src="https://www.discovercharlottetown.com/wp/wp-content/uploads/2023/03/24-reasons-to-visit-charlottetown-in-2024.jpg" alt="" />
-              </div>
-              <div className="card-content">
-                <h4>place</h4>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, tenetur rerum ab laudantium pariatur numquam, sapiente a voluptatem est nemo placeat adipisci quo?</span>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-image">
-                <img src="https://www.discovercharlottetown.com/wp/wp-content/uploads/2023/03/24-reasons-to-visit-charlottetown-in-2024.jpg" alt="" />
-              </div>
-              <div className="card-content">
-                <h4>place</h4>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, tenetur rerum ab laudantium pariatur numquam, sapiente a voluptatem est nemo placeat adipisci quo?</span>
-              </div>
-            </div>
+              <LocationCard title="Azteca" likes={10} image="https://www.tourismpei.com/sites/default/files/images/Azteca%20Mexican%20Restaurant.jpg" description="This restaurant provides you with nice food and a place to rest after a long walk around Charlottetown City Hall. Try perfectly cooked Tacos al Pastor and good enchiladas. You can have tasty tres leches cakes at Azteca Mexican Restaurant." />
+              <LocationCard title="Azteca" likes={30} image="https://www.tourismpei.com/sites/default/files/images/Azteca%20Mexican%20Restaurant.jpg" description="This restaurant provides you with nice food and a place to rest after a long walk around Charlottetown City Hall. Try perfectly cooked Tacos al Pastor and good enchiladas. You can have tasty tres leches cakes at Azteca Mexican Restaurant." />
+              <LocationCard title="Azteca" likes={40} image="https://www.tourismpei.com/sites/default/files/images/Azteca%20Mexican%20Restaurant.jpg" description="This restaurant provides you with nice food and a place to rest after a long walk around Charlottetown City Hall. Try perfectly cooked Tacos al Pastor and good enchiladas. You can have tasty tres leches cakes at Azteca Mexican Restaurant." />
           </div>
         </div>
       </div>
