@@ -1,19 +1,26 @@
 import { IoMdHeart } from "react-icons/io";
 import "./public/index.css";
 
-export default function LocationCard() {
+interface LocationCardProps {
+  title: string,
+  description: string,
+  likes: number,
+  image: string  
+}
+
+export default function LocationCard(Props: LocationCardProps) {
   return (
     <div className="location-card">
         <div className="location-image">
-            <img src={"https://photographylife.com/wp-content/uploads/2023/05/Nikon-Z8-Official-Samples-00002.jpg"} />
+            <img src={Props.image} />
         </div>
         <div className="location-content">
             <div className="location-title-and-desc">
                 <div className="location-title">
-                    Title
+                {Props.title.length > 10 ? `${Props.title.slice(0,10)}...`:Props.title}
                 </div>
                 <div className="location-desc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia veritatis atque corporis dignissimos enim inventore, similique ea totam corrupti, quis iste error quo.
+                    {Props.description.length > 100 ? `${Props.description.slice(0,100)}...`:Props.description}
                 </div>
             </div>
             <div className="location-buttons">
@@ -22,7 +29,7 @@ export default function LocationCard() {
                 </button>
                 <div className="location-likes">
                     <button><IoMdHeart /></button>
-                    <span>0</span>
+                    <span>{Props.likes}</span>
                 </div>
             </div>
         </div>

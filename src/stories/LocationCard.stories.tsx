@@ -13,6 +13,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
     args: {
-        
+        title:"Title",
+        image:"https://photographylife.com/wp-content/uploads/2023/05/Nikon-Z8-Official-Samples-00002.jpg",
+        description:"fjaj",
+        likes:1
     }
 }
