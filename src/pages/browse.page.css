@@ -20,3 +20,10 @@ align-items: top;
 .skeleton {
     width: 50%;
 }
+
+.browse-locations {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    grid-template-rows: auto auto;
+}
