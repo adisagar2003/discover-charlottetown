@@ -6,14 +6,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../utils/api";
 import LocationCard from "../stories/LocationCard";
+import { Location } from "../models/location.model";
 
 export default function BrowsePage() {
   const [isLoadingLocations, setLoadingLocations] = useState(true);
-  const [search, setSearch] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, setSearch] = useState("");
   const [locations, setLocation] = useState([]);
   useEffect(()=> {
     try {
-        const location =axios.get(`${api}/api/location/4`).then((res)=>{
+        axios.get(`${api}/api/location/4`).then((res)=>{
             setLocation(res.data.data);
             console.log(locations);
         });
@@ -24,7 +26,7 @@ export default function BrowsePage() {
         setLocation([]);
         setLoadingLocations(false);
     }
-  }, []);
+  }, [locations]);
 
   return (
     <div className="browse-page">
@@ -42,7 +44,7 @@ export default function BrowsePage() {
             </div>}
             {!isLoadingLocations && locations.length > 0 && (
                 <div className="browse-locations">
-                    {locations.map((location) => {
+                    {locations.map((location:Location) => {
                         return (<LocationCard title={location.title} description={location.description} likes={location.likes} image={location.image} />)
                     })}
                 </div>
