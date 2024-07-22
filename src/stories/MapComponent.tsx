@@ -16,7 +16,7 @@ export default function MapComponent() {
   useEffect(()=>{
     setTimeout( () => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   },)
   function DeckGLOverlay(props) {
     const map = useMap();
