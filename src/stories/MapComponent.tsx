@@ -6,6 +6,7 @@ import { Map, useMap } from '@vis.gl/react-google-maps'
 import { useEffect, useMemo, useState } from 'react';
 import {GoogleMapsOverlay as DeckOverlay} from "@deck.gl/google-maps";
 import {  GeoJsonLayer } from 'deck.gl';
+import TownData from "../data/places.json";
 
 export default function MapComponent() {
 
@@ -17,7 +18,8 @@ export default function MapComponent() {
     setTimeout( () => {
       setIsLoading(false);
     }, 1000);
-  },)
+  },[]);
+
   function DeckGLOverlay(props) {
     const map = useMap();
     const overlay = useMemo(() => new DeckOverlay(props),[]);
@@ -31,16 +33,16 @@ export default function MapComponent() {
     return null;
   }
 
-  const AIR_PORTS = "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson";
+  const LOCATIONS = TownData;
 
   const layers = [
     new GeoJsonLayer({
       id: 'airports',
-      data: AIR_PORTS,
+      data: LOCATIONS,
       // Styles
       filled: true,
       pointRadiusMinPixels: 2,
-      pointRadiusScale: 20,
+      pointRadiusScale: 6,
       getPointRadius: f => 11 - f.properties.scalerank,
       getFillColor: [200, 0, 80, 200],
       // Interactive props
