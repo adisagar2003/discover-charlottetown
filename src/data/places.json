@@ -1,0 +1,145 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Confideration center of Arts",
+          "category": "Arts&Culture"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.127150985748486,
+            46.23431826761407
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Piatto Pizzeria",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12553109557608,
+            46.2322646305457
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Peakes Quay Restaurant and Bar",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12280972966023,
+            46.2321742022676
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Timothy's World Coffee",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12718037354573,
+            46.23618619823148
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Hopyard Cafe",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12747401757822,
+            46.2365068495906
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Old Dublin Pub",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12603595182837,
+            46.23371672516316
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "The Gallery",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.1250833290224,
+            46.234535512346355
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Salt & Sol ",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12507443738643,
+            46.230142445355284
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "The Guild",
+          "category": "Arts&Culture"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.1275209613225,
+            46.23357178718277
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Founder's Food Hall and Market",
+          "category": "Dining"
+        },
+        "geometry": {
+          "coordinates": [
+            -63.12056928424856,
+            46.23365442835285
+          ],
+          "type": "Point"
+        }
+      }
+    ]
+  }
