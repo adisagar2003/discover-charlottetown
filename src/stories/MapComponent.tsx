@@ -6,39 +6,57 @@ import { Map, useMap } from '@vis.gl/react-google-maps'
 import { useEffect, useMemo, useState } from 'react';
 import {GoogleMapsOverlay as DeckOverlay} from "@deck.gl/google-maps";
 import {  GeoJsonLayer } from 'deck.gl';
-import TownData from "../data/places.json";
+  import axios from 'axios';
+import api from '../utils/api';
 
 export default function MapComponent() {
 
-  const [, setIsLoading] = useState(true);
-
+  const [loading] = useState(true);
+  const [locations, setLocations] = useState([]);
+  const [geojs, setGeojs] = useState({});
   // Problem, doesn't populate
   // Solution: Reload the map after a timer
+  
+  // fetch locations from db.
   useEffect(()=>{
-    setTimeout( () => {
-      setIsLoading(false);
-    }, 1000);
-  },[]);
 
+    axios.get(`${api}/api/locationMap/20`).then((res)=>{
+      setLocations(res.data.data);
+      console.log(locations);
+    });
+
+  }, []);
+
+  useEffect(()=>{
+    console.log(locations);
+    setGeojs({
+      "type": "FeatureCollection",
+      "features": locations
+    });
+    
+  },[locations]);
+
+  // make a geojson file clone for this
+  
   function DeckGLOverlay(props) {
     const map = useMap();
     const overlay = useMemo(() => new DeckOverlay(props),[]);
+
     useEffect(() => {
       overlay.setMap(map);
       return () => overlay.setMap(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [map]);
+    }, [map, loading, geojs]);
   
     overlay.setProps(props);
     return null;
   }
 
-  const LOCATIONS = TownData;
 
   const layers = [
     new GeoJsonLayer({
-      id: 'airports',
-      data: LOCATIONS,
+      id: 'locations',
+      data: geojs,
       // Styles
       filled: true,
       pointRadiusMinPixels: 2,
@@ -57,7 +75,7 @@ export default function MapComponent() {
           <Map
               style={{width: '900px', height: '500px'}}
               defaultCenter={{lat: 46.23472677168374, lng: -63.134519289778176}}
-              defaultZoom={8}
+              defaultZoom={14}
               >
                 <DeckGLOverlay  layers={layers}  />
             </Map>
