@@ -4,82 +4,72 @@
 // @ts-nocheck
 import { Map, useMap } from '@vis.gl/react-google-maps'
 import { useEffect, useMemo, useState } from 'react';
-import {GoogleMapsOverlay as DeckOverlay} from "@deck.gl/google-maps";
-import {  GeoJsonLayer } from 'deck.gl';
-  import axios from 'axios';
+import axios from 'axios';
 import api from '../utils/api';
+import { DeckProps } from '@deck.gl/core';
+import {GoogleMapsOverlay} from "@deck.gl/google-maps";
+import { GeoJsonLayer } from 'deck.gl';
+
+function DeckGLOverlay(props: DeckProps) {
+  const map = useMap();
+  const overlay = useMemo(() => new GoogleMapsOverlay(props));
+
+  // set the overlays
+  useEffect(() => {
+    if (!overlay) return null;
+    overlay.setMap(map);    
+    overlay.setProps(props);  
+  }, [map]);
+
+  return null;
+}
+
 
 export default function MapComponent() {
 
-  const [loading] = useState(true);
   const [locations, setLocations] = useState([]);
-  const [geojs, setGeojs] = useState({});
-  // Problem, doesn't populate
-  // Solution: Reload the map after a timer
   
-  // fetch locations from db.
   useEffect(()=>{
-
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       setLocations(res.data.data);
-      console.log(locations);
     });
+  }, []); 
 
-  }, []);
-
-  useEffect(()=>{
-    console.log(locations);
-    setGeojs({
-      "type": "FeatureCollection",
-      "features": locations
-    });
-    
-  },[locations]);
-
-  // make a geojson file clone for this
   
-  function DeckGLOverlay(props) {
-    const map = useMap();
-    const overlay = useMemo(() => new DeckOverlay(props),[]);
-
-    useEffect(() => {
-      overlay.setMap(map);
-      return () => overlay.setMap(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [map, loading, geojs]);
-  
-    overlay.setProps(props);
-    return null;
-  }
-
-
   const layers = [
     new GeoJsonLayer({
-      id: 'locations',
-      data: geojs,
-      // Styles
+      id: 'GeoJsonLayer ',
+      data: locations,
+      stroked: true,
       filled: true,
-      pointRadiusMinPixels: 2,
-      pointRadiusScale: 6,
-      getPointRadius: f => 11 - f.properties.scalerank,
-      getFillColor: [200, 0, 80, 200],
-      // Interactive props
+      pointType: 'circle',
       pickable: true,
-      autoHighlight: true,
+  
+      getFillColor: [160, 160, 180, 200],
+      getLineColor: (f: Feature<Geometry, PropertiesType>) => {
+        const hex = f.properties.color;
+        // convert to RGB
+        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
+      },
+      getText: (f: Feature<Geometry, PropertiesType>) => f.properties.name,
+      getLineWidth: 1,
+      getPointRadius: 10,
+      getTextSize: 12
+
     })
   ];
 
+
   return (
     <div className='map-layout'>
-        <div className='map'>
+        <div className='map'> 
           <Map
               style={{width: '900px', height: '500px'}}
               defaultCenter={{lat: 46.23472677168374, lng: -63.134519289778176}}
-              defaultZoom={14}
+              defaultZoom={15}
               >
-                <DeckGLOverlay  layers={layers}  />
-            </Map>
-            
+              <DeckGLOverlay interleaved={false} layers={layers} />
+          </Map>
         </div>
     </div>
   )
