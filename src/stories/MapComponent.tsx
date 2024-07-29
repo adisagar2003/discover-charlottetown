@@ -5,9 +5,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import api from '../utils/api';
-import DeckGL from '@deck.gl/react';
 import {MapboxOverlay} from '@deck.gl/mapbox';
-import {  Deck, GeoJsonLayer, log } from 'deck.gl';
+import { GeoJsonLayer } from 'deck.gl';
 import Map, { useControl } from 'react-map-gl/maplibre';
 
 // function DeckGLOverlay(props: DeckProps) {
@@ -28,7 +27,6 @@ import Map, { useControl } from 'react-map-gl/maplibre';
 export default function MapComponent() {
 
   const [locations, setLocations] = useState([]);
-  const [hoverInfo, setHoverInfo] = useState({});
 
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
