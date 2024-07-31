@@ -8,6 +8,9 @@ import api from '../utils/api';
 import {MapboxOverlay} from '@deck.gl/mapbox';
 import { GeoJsonLayer } from 'deck.gl';
 import Map, { useControl } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+
 
 // function DeckGLOverlay(props: DeckProps) {
 //   const map = useMap();
@@ -51,12 +54,10 @@ export default function MapComponent() {
     new GeoJsonLayer<BlockProperties>({
       id: 'GeoJsonLayer',
     data: locations,
-
     stroked: false,
     filled: true,
     pointType: 'circle+text',
-    pickable: true,
-
+    pickable: false,
     getFillColor: [160, 160, 180, 200],
     getLineColor: (f: Feature<Geometry, PropertiesType>) => {
       const hex = f.properties.color;
