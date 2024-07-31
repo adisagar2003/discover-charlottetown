@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import api from '../utils/api';
 import {MapboxOverlay} from '@deck.gl/mapbox';
@@ -50,14 +50,28 @@ export default function MapComponent() {
     return null;
   }
 
+  // get tooltip callback
+  const getTooltip = useCallback(({object}) => {
+    return object && {
+      html: `<div>${(object.properties.name)}</div> <div>${object.properties.category}</div>`,
+      style: {
+        backgroundColor: '#c4c4c4',
+        fontSize: '0.8em',
+        color: 'black'
+      }
+    }
+  });
+
   const LAYERS = [
     new GeoJsonLayer<BlockProperties>({
       id: 'GeoJsonLayer',
     data: locations,
-    stroked: false,
+    stroked: true,
     filled: true,
-    pointType: 'circle+text',
-    pickable: false,
+    pointType: 'circle',
+    pickable: true,
+    autoHighlight: true, 
+    highlightColor:[0,255,0],
     getFillColor: [160, 160, 180, 200],
     getLineColor: (f: Feature<Geometry, PropertiesType>) => {
       const hex = f.properties.color;
@@ -67,8 +81,12 @@ export default function MapComponent() {
     getText: (f: Feature<Geometry, PropertiesType>) => f.properties.name,
     getLineWidth: 20,
     getPointRadius: 4,
-    getTextSize: 12
-    })
+    getTextSize: 12,
+    onClick: (pickingInfo, event) => {
+      console.log(pickingInfo, event);  
+    },
+    }),
+    
   ];
 
  
@@ -83,7 +101,7 @@ export default function MapComponent() {
           style={{width: 600, height: 400}}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
         >
-          <DeckGLOverlay layers={LAYERS} initialViewState={INITIAL_VIEW_STATE} interleaved={false} />
+          <DeckGLOverlay layers={LAYERS} getTooltip={getTooltip} initialViewState={INITIAL_VIEW_STATE} interleaved={false} />
         </Map>
      
       </div>
