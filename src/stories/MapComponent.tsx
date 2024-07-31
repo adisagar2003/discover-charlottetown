@@ -82,7 +82,7 @@ export default function MapComponent() {
           style={{width: 600, height: 400}}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
         >
-          <DeckGLOverlay layers={LAYERS} interleaved={false} />
+          <DeckGLOverlay layers={LAYERS} initialViewState={INITIAL_VIEW_STATE} interleaved={false} />
         </Map>
      
       </div>
