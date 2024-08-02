@@ -10,8 +10,6 @@ import { GeoJsonLayer } from 'deck.gl';
 import Map, { useControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-
-
 // function DeckGLOverlay(props: DeckProps) {
 //   const map = useMap();
 //   const overlay = useMemo(() => new GoogleMapsOverlay(props));
@@ -25,7 +23,6 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 //   return null;
 // }
-
 
 export default function MapComponent() {
 
