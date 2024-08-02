@@ -2,14 +2,13 @@
 /* eslint-disable no-use-before-define */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import api from '../utils/api';
-import {MapboxOverlay} from '@deck.gl/mapbox';
-import { GeoJsonLayer } from 'deck.gl';
-import Map, { useControl } from 'react-map-gl/maplibre';
+import Map, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
-
+import { useSelector } from 'react-redux';
+import type {MapRef} from 'react-map-gl/maplibre';
 
 
 // function DeckGLOverlay(props: DeckProps) {
@@ -25,15 +24,14 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 //   return null;
 // }
-
-
 export default function MapComponent() {
 
   const [locations, setLocations] = useState([]);
-
+  const mapRef = useRef<MapRef>();
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       setLocations(res.data.data);      
+      console.log(userData.user.locations)
     });
   }, []); 
 
@@ -44,50 +42,9 @@ export default function MapComponent() {
     zoom: 14
   }
 
-  function DeckGLOverlay(props: DeckProps) {
-    const overlay = useControl(() => new MapboxOverlay(props));
-    overlay.setProps(props);
-    return null;
-  }
+  // load user data
+  const userData = useSelector(state=>state.value);
 
-  // get tooltip callback
-  const getTooltip = useCallback(({object}) => {
-    return object && {
-      html: `<div>${(object.properties.name)}</div> <div>${object.properties.category}</div>`,
-      style: {
-        backgroundColor: '#c4c4c4',
-        fontSize: '0.8em',
-        color: 'black'
-      }
-    }
-  });
-
-  const LAYERS = [
-    new GeoJsonLayer<BlockProperties>({
-      id: 'GeoJsonLayer',
-    data: locations,
-    stroked: true,
-    filled: true,
-    pointType: 'circle',
-    pickable: true,
-    autoHighlight: true, 
-    highlightColor:[0,255,0],
-    getFillColor: [160, 160, 180, 200],
-    getLineColor: (f: Feature<Geometry, PropertiesType>) => {
-      const hex = f.properties.color;
-      // convert to RGB
-      return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
-    },
-    getText: (f: Feature<Geometry, PropertiesType>) => f.properties.name,
-    getLineWidth: 20,
-    getPointRadius: 4,
-    getTextSize: 12,
-    onClick: (pickingInfo, event) => {
-      console.log(pickingInfo, event);  
-    },
-    }),
-    
-  ];
 
  
 
@@ -95,13 +52,23 @@ export default function MapComponent() {
     <div className='map-layout'>  
       <div className="map">
        
-         <Map 
+         <Map
+          ref={mapRef}
           reuseMaps
           initialViewState={INITIAL_VIEW_STATE}
           style={{width: 600, height: 400}}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
         >
-          <DeckGLOverlay layers={LAYERS} getTooltip={getTooltip} initialViewState={INITIAL_VIEW_STATE} interleaved={false} />
+          {locations.map((location) => {
+            if (!userData) return <Marker color='cyan' onClick={()=>console.log(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (!userData.user.locations) return <Marker color='blue' onClick={()=>console.log(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+      
+            
+            if (userData.user.locations.includes(location.id)) return (<Marker color='green' onClick={()=>console.log(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+            
+            return <Marker color='cyan' onClick={()=>console.log(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            
+          })}
         </Map>
      
       </div>
