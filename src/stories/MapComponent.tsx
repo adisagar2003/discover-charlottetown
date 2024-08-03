@@ -35,14 +35,9 @@ export default function MapComponent() {
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       setLocations(res.data.data);      
-      console.log(userData.user.locations);
     });
   }, []); 
 
-  useEffect(()=>{
-    console.log(popupLatitude);
-    console.log(popupRef);
-  },[popupLatitude]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const INITIAL_VIEW_STATE={
     latitude: 46.235177898487095,
