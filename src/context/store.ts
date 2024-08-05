@@ -4,6 +4,7 @@ import { useStore } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import Cookies from 'universal-cookie';
 
 const persistConfig = {
     key: 'root',
@@ -19,16 +20,19 @@ const initialState: UserState = {
     value: null
 }
 
+const cookies = new Cookies();
+
 const authSlice = createSlice({
     name:'auth',
     initialState: initialState,
     reducers: {
         login: (state, action) => {
-            state.value = {user:action.payload}
+            state.value = {user:action.payload}            
         },
         logout: (state) => {
             state.value = null
             window.location.reload();
+            cookies.remove('token');
         }
     }
 });

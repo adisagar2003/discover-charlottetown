@@ -6,9 +6,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../context/store";
+import Cookies from 'universal-cookie';
 
 function LoginPage() {
-
+  const cookies = new Cookies();
   const [loading, setLoginLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -24,6 +25,7 @@ function LoginPage() {
             }).then((res)=>{
                 setLoginLoading(false);
                 dispatch(login(res.data));
+                cookies.set('token', res.data.token)
                 navigate('/');            
             }).catch(err => {
                 if (err.response.status == 400) {
