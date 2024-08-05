@@ -355,6 +355,11 @@
     transform: scale(1);
 }
 
+/* Map Modal component */
+.place-modal {
+    background-color: red;
+}
+
 /* Searchbar starts here */
 .searchbar {
     display: flex;
