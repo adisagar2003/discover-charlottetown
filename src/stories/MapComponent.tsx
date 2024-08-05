@@ -47,13 +47,21 @@ export default function MapComponent() {
   // load user data
   const userData = useSelector(state=>state.value);
   useEffect(()=>{
-    
   },[selectedMarker]);
 
   // onClick marker 
   const markerClickEvent = (location) => {
     setModalOpen(true);
-    setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })
+    setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties, id: location.id })
+  }
+
+  // visit Location
+  const visitLocation = async (location) => {
+    const response = await axios.post(`${api}/api/visitLocation`,{
+      id: location.id
+    }, {withCredentials:true});
+
+    console.log(response);
   }
   return (
     <div className='map-layout'>  
@@ -78,15 +86,15 @@ export default function MapComponent() {
               {selectedMarker.properties.category}
             </div>
             <button onClick={()=>setModalOpen(false)}>Close Modal</button>
+            {userData && <button onClick={()=>visitLocation(selectedMarker)}>Mark as visited</button>}
           </ReactModal>
         )}
 
         {locations.map((location) => {        
             if (!userData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (!userData.user.locations) return <Marker  id={location} color='blue' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (userData.user.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+            if (!userData.user.locations) return <Marker  id={location} color='blue' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (userData.user.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
             return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
-             
             </Marker>
           })}      
         </Map>
