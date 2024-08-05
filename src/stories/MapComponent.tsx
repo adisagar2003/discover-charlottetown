@@ -78,13 +78,14 @@ export default function MapComponent() {
               {selectedMarker.properties.category}
             </div>
             <button onClick={()=>setModalOpen(false)}>Close Modal</button>
+            {userData && <button>Mark as visited</button>}
           </ReactModal>
         )}
 
         {locations.map((location) => {        
             if (!userData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (!userData.user.locations) return <Marker  id={location} color='blue' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (userData.user.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+            if (!userData.user.locations) return <Marker  id={location} color='blue' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (userData.user.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
             return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
              
             </Marker>
