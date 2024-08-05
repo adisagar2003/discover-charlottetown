@@ -6,6 +6,10 @@ import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../context/store";
+import UploadWidget from "../stories/UploadWidget";
+import {Cloudinary} from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -14,13 +18,42 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
+  const [publicId,  setPublicId] = useState("");
+  const [cloudName] = useState("dvdwmixyk");
+  const [uploadPreset] = useState("q9bcphea");
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset
+    // cropping: true, //add a cropping step
+    // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+    // sources: [ "local", "url"], // restrict the upload sources to URL and local files
+    // multiple: false,  //restrict upload to a single file
+    // folder: "user_images", //upload files to the specified folder
+    // tags: ["users", "profile"], //add the given tags to the uploaded files
+    // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+    // clientAllowedFormats: ["images"], //restrict uploading to image files only
+    // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+    // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+    // theme: "purple", //change to a purple theme
+  });
+  // for user state
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // development testing....getting the image to register
-  useEffect(() => {
-    console.log(profilePicture);
-  }, [profilePicture])
+  // Create a Cloudinary instance and set your cloud name.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName
+    }
+  });
+  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const myImage = cld.image(publicId);
+
+  useEffect(()=>{
+    console.log(myImage);
+    
+  },[]);
   const registerUser = () => {
     if (username != "" || password != "" || confirmPassword != "" || email != "") {
         // register user inside
@@ -71,12 +104,20 @@ export default function RegisterPage() {
                 <input onChange={e=>setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" />
                 <input onChange={e=>setConfirmPassword(e.target.value)} type="password" name="confirmPassword" id="" placeholder="confirm password" />
                 <input onChange={e=>setEmail(e.target.value)} type="text" name="email" id="" placeholder="Email" />
+                <AdvancedImage
+                    style={{maxWidth: "100%"}}
+                    cldImg={myImage}
+                    plugins={[responsive(), placeholder()]}
+                    >
+                </AdvancedImage>
                 <input onChange={e=>setProfilePicture(e.target.value)} accept=".png,.jpg,.jpeg" type="file" name="profilePicture" id="" placeholder="password" />
+                <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
             </div>
+            
             <button onClick={registerUser} className="login-button">
                 {registerLoading ? <ClipLoader />:"Register"} 
             </button>
-        </div>
+        </div> 
     </div>
   )
 }   
