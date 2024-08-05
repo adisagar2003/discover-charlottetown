@@ -39,7 +39,8 @@
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "universal-cookie": "^7.2.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",
