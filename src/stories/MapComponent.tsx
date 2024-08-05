@@ -2,15 +2,14 @@
 /* eslint-disable no-use-before-define */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import api from '../utils/api';
-import Map, { Marker, Popup } from 'react-map-gl/maplibre';
+import Map, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useSelector } from 'react-redux';
 import type {MapRef} from 'react-map-gl/maplibre';
-
-
+import ReactModal from "react-modal";
 // function DeckGLOverlay(props: DeckProps) {
 //   const map = useMap();
 //   const overlay = useMemo(() => new GoogleMapsOverlay(props));
@@ -27,10 +26,10 @@ import type {MapRef} from 'react-map-gl/maplibre';
 export default function MapComponent() {
 
   const [locations, setLocations] = useState([]);
-  const [showPopup, setShowPopup] = useState<boolean>(true);
-  const [popupLatitude, setPopupLocation] = useState([46.235177898487095,-63.12670440273208]);
   const mapRef = useRef<MapRef>();
-  const popupRef = useRef();
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
   // const currentMap = useMap();
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
@@ -47,13 +46,15 @@ export default function MapComponent() {
 
   // load user data
   const userData = useSelector(state=>state.value);
-  
-  // clicking marker 
+  useEffect(()=>{
+    
+  },[selectedMarker]);
 
-  const onClickMarker = useCallback((location) =>{
-      setPopupLocation([location.geometry.coordinates[1],location.geometry.coordinates[0]]);
-  },[]);
-
+  // onClick marker 
+  const markerClickEvent = (location) => {
+    setModalOpen(true);
+    setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })
+  }
   return (
     <div className='map-layout'>  
       <div className="map">
@@ -65,17 +66,29 @@ export default function MapComponent() {
           style={{width: 600, height: 400}}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
         >
-          {locations.map((location) => {
-            if (!userData) return <Marker color='cyan' onClick={()=>onClickMarker(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (!userData.user.locations) return <Marker color='blue' onClick={()=>onClickMarker(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (userData.user.locations.includes(location.id)) return (<Marker color='green' onClick={()=>onClickMarker(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
-            return <Marker color='cyan' onClick={()=>onClickMarker(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-          })}        
-          {showPopup && <Popup ref={popupRef} longitude={popupLatitude[1]} latitude={popupLatitude[0]}
-            anchor="top"
-            onClose={() => setShowPopup(true)}>
-            You are here
-          </Popup>}
+        {selectedMarker && (
+          <ReactModal
+            isOpen={modalOpen}
+            className="place-modal"
+          >
+            <div>
+              {selectedMarker.properties.name}
+            </div>
+            <div>
+              {selectedMarker.properties.category}
+            </div>
+            <button onClick={()=>setModalOpen(false)}>Close Modal</button>
+          </ReactModal>
+        )}
+
+        {locations.map((location) => {        
+            if (!userData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (!userData.user.locations) return <Marker  id={location} color='blue' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (userData.user.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>{setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties })}} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+            return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
+             
+            </Marker>
+          })}      
         </Map>
      
       </div>
