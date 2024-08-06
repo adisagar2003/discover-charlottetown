@@ -43,6 +43,7 @@ export default function Progress() {
             backgroundColor: '#3e98c7',
   })}
 />}
+
         ;
     </div>
   )
