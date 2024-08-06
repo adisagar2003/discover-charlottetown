@@ -29,7 +29,6 @@ export default function MapComponent() {
   const mapRef = useRef<MapRef>();
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-
   // const currentMap = useMap();
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
@@ -46,8 +45,6 @@ export default function MapComponent() {
 
   // load user data
   const userData = useSelector(state=>state.value);
-  useEffect(()=>{
-  },[selectedMarker]);
 
   // onClick marker 
   const markerClickEvent = (location) => {
@@ -60,7 +57,6 @@ export default function MapComponent() {
     const response = await axios.post(`${api}/api/visitLocation`,{
       id: location.id
     }, {withCredentials:true});
-
     console.log(response);
   }
   return (
