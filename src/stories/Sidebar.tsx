@@ -3,14 +3,27 @@ import { MdArrowBack, MdHome, MdNotifications, MdPerson, MdPerson2, MdSearch } f
 import './public/index.css';
 import { RiProgress3Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { logout, useAppSelector } from '../context/store';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import api from '../utils/api';
 
 function Sidebar() {
   const userData:(any) = useAppSelector((state )=>state.value);
   const dispatch = useDispatch()
   const [sidebarResponsiveVisible, setSidebarResponsiveVisible] = useState<boolean>(true);
+  const [dynamicUserData, setDynamicUserData] = useState<any>(null);
+
+  // Check for user data
+  useEffect(()=>{
+    if (userData) {
+      // load user data from the id provided
+      axios.get(`${api}/api/user/${userData.user.id}`).then((response)=>{
+          setDynamicUserData(response.data.response);
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -23,19 +36,19 @@ function Sidebar() {
           <div className="sidebar-logo">
             <img src={"/ctown-logo.png"} alt="" />
           </div>
-          {(userData != null &&(
+          {(dynamicUserData != null &&(
            
             <div className='sidebar-content__user'>
             <div className='sidebar-content__profile-picture'>
-                <img src={""} />
+                <img src={dynamicUserData.profilePicture} />
             </div>
             <div className='sidebar-content__username-email'>
               
                 <h2>
-                  {userData.user.username}
+                  {dynamicUserData.username}
                 </h2>
                 <span>
-                  {userData.user.email}
+                  {dynamicUserData.email}
                 </span>
             </div>
           </div>

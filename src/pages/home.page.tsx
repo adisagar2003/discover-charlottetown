@@ -5,7 +5,6 @@ export default function HomePage(){
         <div className='main'>
             <div className="map-content">
               <MapComponent />
-
             </div>
           </div>
   )
