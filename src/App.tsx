@@ -36,7 +36,6 @@ function App() : JSX.Element {
                       <Route element={<NotificationPage />} path='/notifications' />
                       <Route element={<LoginPage />} path='/login' />
                       <Route element={<RegisterPage />} path='/register' />
-                      
                   </Routes>
                   {/* Progress route added */}
                   <Progress />

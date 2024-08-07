@@ -24,8 +24,8 @@ function LoginPage() {
                 "password": password
             }).then((res)=>{
                 setLoginLoading(false);
-                dispatch(login(res.data));
-                cookies.set('token', res.data.token)
+                dispatch(login(res.data));  
+                cookies.set('token', res.data.token);
                 navigate('/');            
             }).catch(err => {
                 if (err.response.status == 400) {
