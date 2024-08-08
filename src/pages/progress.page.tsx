@@ -1,26 +1,24 @@
 import "./progress.page.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-import LocationCard from "../stories/LocationCard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ProgressPage() {
 
-  const data = {
-    labels: [
-      'Unexplored areas',
-    ],
-    datasets: [{
-      label: '',
-      data: [80,20],
-      backgroundColor: [
-        'rgb(126, 178, 234)',
-        'rgb(77, 216, 238)'
-      ],
-      hoverOffset: 1
-    }]
-  };
+  // const data = {
+  //   labels: [
+  //     'Unexplored areas',
+  //   ],
+  //   datasets: [{
+  //     label: '',
+  //     data: [80,20],
+  //     backgroundColor: [
+  //       'rgb(126, 178, 234)',
+  //       'rgb(77, 216, 238)'
+  //     ],
+  //     hoverOffset: 1
+  //   }]
+  // };
 
   return (
     <div className="main" >
@@ -37,7 +35,43 @@ function ProgressPage() {
           </div>
         </div>
       </div> */}
-      I won't die for you
+      <div className="progress-container">
+        <div className="progress-content">
+          <div className="progress-activity">
+            <div className="progress-heading">
+                <span>
+                  Activity
+                </span>
+                <span className="year">
+                  2024  
+                </span>
+            </div>
+            <div className="progress-profile">
+                <div className="progress-profile-picture">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                </div>
+                <div className="progress-profile-contents">
+                  <span className="progress-profile-name">
+                    Yakova
+                  </span>
+                  <span>
+                    8 locations visited
+                  </span>
+                </div>  
+                <div className="progress-analytics">
+                  <div className="progress-bar">
+
+                  </div>
+                </div>
+            </div>
+            <div className="progress-bar">
+                <div   className="progress-bar-bg">
+                  
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,39 +1,78 @@
 .progress-container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    grid-template-areas: "piechart linegraph" "recommendation recommendation";
-    background-color: aliceblue;
-
-}
-
-.progress-linegraphs {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.progress-recommendations {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: rgb(213, 213, 213);
     display: flex;
     justify-content: center;
+}
+
+.progress-activity {
+    background-color: white;
+    border-radius: 24px;
+    padding: 20px;
+    min-width: 100%;
+}
+
+.progress-content {
+    padding: 20px;
+    min-width: 70%;
+}
+
+.progress-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 24px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px dotted grey;
+}
+
+.progress-profile {
+    display: flex;
     align-items: center;
-    flex-direction: column;
-    grid-area: "recommendation";
-    grid-column: 1/3;
-    gap: 12px;
+    margin-top: 10px;
+    border-bottom: 0.5px dotted grey;
+    padding-bottom: 10px;
+}
+
+.progress-profile-picture {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
     position: relative;
-    overflow: scroll;
 }
 
-.card-container {
-    display: flex;
-    gap: 10px;
-    
-}
-
-.card-image > img {
+.progress-profile-picture > img {
     width: 100%;
     height: 100%;
+}
+
+.progress-profile-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.progress-analytics {
+    padding: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background-color: #85adad;
+    margin-top: 40px;
+    position: relative;
+}
+
+.progress-bar-bg {
+    height: 100%;
+    width: 0;
+    background-color: #4071ED;
+    border-radius: 12px;
+    border-radius: 12px;
 }
