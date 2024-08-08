@@ -24,7 +24,7 @@ function ProgressPage() {
 
   return (
     <div className="main" >
-      <div className="progress-container">
+      {/* <div className="progress-container">
         <div className="progress-piechart">
           <Pie data={data} />
         </div>
@@ -36,7 +36,8 @@ function ProgressPage() {
               <LocationCard title="Azteca" likes={40} image="https://www.tourismpei.com/sites/default/files/images/Azteca%20Mexican%20Restaurant.jpg" description="This restaurant provides you with nice food and a place to rest after a long walk around Charlottetown City Hall. Try perfectly cooked Tacos al Pastor and good enchiladas. You can have tasty tres leches cakes at Azteca Mexican Restaurant." />
           </div>
         </div>
-      </div>
+      </div> */}
+      I won't die for you
     </div>
   )
 }
