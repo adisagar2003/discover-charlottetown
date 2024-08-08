@@ -91,14 +91,16 @@ export default function MapComponent() {
             isOpen={modalOpen}
             className="place-modal"
           >
-            <div>
-              {selectedMarker.properties.name}
+            <div className='modal-contents'>
+              <div>
+                {selectedMarker.properties.name}
+              </div>
+              <div className='modal-category'>
+                {selectedMarker.properties.category}
+              </div>
             </div>
-            <div>
-              {selectedMarker.properties.category}
-            </div>
-            <button onClick={()=>setModalOpen(false)}>Close Modal</button>
-            {userData && <button onClick={()=>visitLocation(selectedMarker)}>Mark as visited</button>}
+            <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>
+            {userData && <button className='modal-button' onClick={()=>visitLocation(selectedMarker)}>Mark as visited</button>}
           </ReactModal>
         )}
 
