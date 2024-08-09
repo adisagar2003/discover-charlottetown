@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ProgressPage() {
-
+  
   // const data = {
   //   labels: [
   //     'Unexplored areas',
@@ -65,7 +65,7 @@ function ProgressPage() {
                 </div>
             </div>
             <div className="progress-bar">
-                <div   className="progress-bar-bg">
+                <div style={{width:"20%" }}  className="progress-bar-bg">
                   
                 </div>
             </div>

@@ -1,29 +1,6 @@
 .browse-page {
-    background-color: rgb(169, 169, 169);
     width: 100%;
-    display: flex;
-justify-content: center;
-align-items: top;
-
-
-}
-
-.browsepage-content {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    margin-top: 50px;
-    align-items: center;
-    width: 100%;
-}
-
-.skeleton {
-    width: 50%;
-}
-
-.browse-locations {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 10px;
-    grid-template-rows: auto auto;
+    height: 100%;
+    background-color: rgb(206, 206, 206);
+    
 }
