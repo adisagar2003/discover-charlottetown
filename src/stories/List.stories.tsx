@@ -8,15 +8,19 @@ function List(props: any) {
 
   const [responseData, setResponseData] = useState([]);
   const [responseLoading, setResponseLoading] = useState(true);
+
   useEffect(()=> {
     setResponseLoading(false);
   }, []);
+
   useEffect(()=>{
+    setResponseLoading(true);
     axios.get(`${api}/api/locationMapSearch/${props.searchValue}`).then((response)=>{
         setResponseData(response.data.response);
         setResponseLoading(false);
     })
-  },[props]);
+  },[props]);  
+
   return (
     <div className="responseData">
         {responseLoading ? <ClipLoader />: null}

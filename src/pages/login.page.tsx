@@ -33,6 +33,8 @@ function LoginPage() {
                     setLoginLoading(false);
                 }
             });
+
+            setLoginLoading(false)
         }
   }
 
