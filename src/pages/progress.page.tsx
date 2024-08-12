@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./progress.page.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useAppSelector } from "../context/store";
