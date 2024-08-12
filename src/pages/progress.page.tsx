@@ -1,5 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "./progress.page.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useAppSelector } from "../context/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import api from "../utils/api";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -20,6 +25,21 @@ function ProgressPage() {
   //   }]
   // };
 
+  const userData:(any) = useAppSelector((state) => state.value);
+  const [locationLength, setLocationLength] = useState(0);
+  const [dynamicUserData, setDynamicUserData] = useState<any>(null);
+
+  useEffect(()=>{
+    if (userData) {
+      // load user data from the id provided
+      axios.get(`${api}/api/user/${userData.user.id}`).then((response)=>{
+        setDynamicUserData(response.data.response);
+    });
+      if (dynamicUserData!=null) {
+        setLocationLength(dynamicUserData.locations.length);
+      }
+    } 
+  }, [userData, dynamicUserData])
   return (
     <div className="main" >
       {/* <div className="progress-container">
@@ -48,19 +68,19 @@ function ProgressPage() {
             </div>
             <div className="progress-profile">
                 <div className="progress-profile-picture">
-                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" />
+                  <img src={dynamicUserData.profilePicture} alt="" />
                 </div>
                 <div className="progress-profile-contents">
                   <span className="progress-profile-name">
-                    Yakova
+                    {dynamicUserData.username}
                   </span>
                   <span>
-                    8 locations visited
+                    {locationLength} locations visited
                   </span>
                 </div>  
                 <div className="progress-analytics">
                   <div className="progress-bar">
-
+        
                   </div>
                 </div>
             </div>

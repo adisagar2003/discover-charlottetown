@@ -575,7 +575,7 @@ min-width: 50%;
     border-radius: 50%;
     padding: 4px;
     outline: none;
-    border: none;
+    border: none
 }
 
 .location-desc {
@@ -594,3 +594,21 @@ min-width: 50%;
     width: 100px;
 }
 
+.locationMapComponent {
+    padding-top: 10px;
+    padding-bottom: 12px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 4px;
+}
+
+.locationMapComponent-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.List-responseData {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
