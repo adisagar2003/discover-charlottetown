@@ -4,7 +4,7 @@ import useDebounce from "../hooks/useDebounce";
 import List from "./List.stories";
 
 function Searchbar() {
-  const [searchcontent, setSearchContent] = useState("");
+  const [searchcontent, setSearchContent] = useState("a");
   const searchData = useDebounce(searchcontent);
   return (
     <div className="searchbar-container">
