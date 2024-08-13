@@ -56,25 +56,37 @@ export default function MapComponent() {
 
   // visit Location
   const visitLocation = async (location) => {
-    await axios.post(`${api}/api/visitLocation`,{
-      id: location.id
-    }, {withCredentials:true});
-    updateDynamicUserData();
-    window.location.reload();
+    try {
+      await axios.post(`${api}/api/visitLocation`,{
+        id: location.id
+      }, {withCredentials:true});    
+      updateDynamicUserData();
+      window.location.reload();
+    }
+    catch(err) {
+      
+      if (err.response.status == 300) {
+        alert('Already visited location');
+      } 
+    }
+
   }
 
   function updateDynamicUserData() {
     axios.get(`${api}/api/user/${userData.user.id}`).then((response)=>{
-      console.log(response.data.response);
       setDynamicUserData(response.data.response);
     })
   }
   // rerender the component everytime the dynamic userData changes 
   useEffect(()=>{
     if (userData) {
+
       updateDynamicUserData();
+      console.log(dynamicUserData);
+      console.log(selectedMarker);
     }  
-  },[modalOpen]);
+  },[modalOpen, selectedMarker]);
+
   return (
     <div className='map-layout'>  
       <div className="map">
