@@ -8,19 +8,19 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../context/store";
 import UploadWidget from "../stories/UploadWidget";
 import {Cloudinary} from "@cloudinary/url-gen";
-import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
-
+import Cookies from "universal-cookie";
 
 export default function RegisterPage() {
+  const cookies = new Cookies();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
   const [publicId,  setPublicId] = useState("");
   const [cloudName] = useState("dvdwmixyk");
   const [uploadPreset] = useState("q9bcphea");
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uwConfig] = useState({
     cloudName,
     uploadPreset
@@ -50,10 +50,10 @@ export default function RegisterPage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const myImage = cld.image(publicId);
 
-  useEffect(()=>{
-    console.log(myImage);
-    
-  },[]);
+  useEffect(()=> {
+    setImageUrl(localStorage.getItem("profilePicture")) ;
+  }, []);
+
   const registerUser = () => {
     if (username != "" || password != "" || confirmPassword != "" || email != "") {
         // register user inside
@@ -61,28 +61,32 @@ export default function RegisterPage() {
         if (password == confirmPassword) {
             // confirm password 
             // register the user
-            axios.post(`${api}/api/user`, {
-                "username":username, 
-                "password": password,
-                "profilePicture": `${profilePicture}`,
-                "email": email
-            }).then(() => {
-                setRegisterLoading(false);
-
-            });
-
-            axios.post(`${api}/api/auth/login`, {
-                "username": username,
-                "password": password
-            }).then((res)=>{
-                dispatch(login(res.data));
-                navigate('/');
-            }).catch(err => {
-                if (err.response.status == 400) {
-                    alert("Incorrect username or password");
-                }
-            });
-
+            if (imageUrl != null) {
+                localStorage.removeItem("profilePicture");
+                axios.post(`${api}/api/user`, {
+                    "username":username, 
+                    "password": password,
+                    "profilePicture": `${imageUrl}`,
+                    "email": email
+                }).then(() => {
+                    setRegisterLoading(false);
+                    axios.post(`${api}/api/auth/login`, {
+                        "username": username,
+                        "password": password
+                    }).then((res)=>{
+                        dispatch(login(res.data));                
+                        cookies.set('token', res.data.token);
+                        navigate('/');
+                    }).catch(err => {
+                        if (err.response.status == 400) {
+                            alert("Incorrect username or password");
+                        }
+                    });
+        
+                });
+            } else {
+                alert('insert an image');
+            }   
         } 
         else {
             // passwords and confirm password dont match
@@ -93,6 +97,7 @@ export default function RegisterPage() {
         alert("Empty credentials");
     }
   }
+
   return (
     <div className='login-layout'>
         <div className='login-card'>
@@ -104,16 +109,14 @@ export default function RegisterPage() {
                 <input onChange={e=>setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" />
                 <input onChange={e=>setConfirmPassword(e.target.value)} type="password" name="confirmPassword" id="" placeholder="confirm password" />
                 <input onChange={e=>setEmail(e.target.value)} type="text" name="email" id="" placeholder="Email" />
-                <AdvancedImage
+                {/* <AdvancedImage
                     style={{maxWidth: "100%"}}
                     cldImg={myImage}
                     plugins={[responsive(), placeholder()]}
                     >
-                </AdvancedImage>
-                <input onChange={e=>setProfilePicture(e.target.value)} accept=".png,.jpg,.jpeg" type="file" name="profilePicture" id="" placeholder="password" />
-                <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+                </AdvancedImage> */}
             </div>
-            
+            <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId} setResultUrl={setImageUrl} />
             <button onClick={registerUser} className="login-button">
                 {registerLoading ? <ClipLoader />:"Register"} 
             </button>
