@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../context/store";
 import UploadWidget from "../stories/UploadWidget";
-import {Cloudinary} from "@cloudinary/url-gen";
 import Cookies from "universal-cookie";
 
 export default function RegisterPage() {
@@ -17,7 +16,7 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
-  const [publicId,  setPublicId] = useState("");
+  const [,  setPublicId] = useState("");
   const [cloudName] = useState("dvdwmixyk");
   const [uploadPreset] = useState("q9bcphea");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -41,14 +40,14 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   // Create a Cloudinary instance and set your cloud name.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName
-    }
-  });
+//   const cld = new Cloudinary({
+//     cloud: {
+//       cloudName
+//     }
+//   });
   
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const myImage = cld.image(publicId);
+//   const myImage = cld.image(publicId);
 
   useEffect(()=> {
     setImageUrl(localStorage.getItem("profilePicture")) ;
