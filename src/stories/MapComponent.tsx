@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
 import api from '../utils/api';
 import Map, { Marker } from 'react-map-gl/maplibre';
@@ -30,6 +30,7 @@ export default function MapComponent() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [dynamicUserData, setDynamicUserData] = useState(null);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
   // const currentMap = useMap();
 
   useEffect(()=>{
@@ -78,14 +79,11 @@ export default function MapComponent() {
     })
   }
   // rerender the component everytime the dynamic userData changes 
+ 
   useEffect(()=>{
-    if (userData) {
-
-      updateDynamicUserData();
-      console.log(dynamicUserData);
-      console.log(selectedMarker);
-    }  
-  },[modalOpen, selectedMarker]);
+    console.log(dynamicUserData);
+    forceUpdate();
+  }, [dynamicUserData])
 
   return (
     <div className='map-layout'>  
