@@ -46,7 +46,7 @@ function ProgressPage() {
         setLocationLength(dynamicUserData.locations.length);
       }
     } 
-  }, [userData, dynamicUserData])
+  }, [userData, dynamicUserData]);
 
   return (
     <div className="main" >

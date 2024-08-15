@@ -60,7 +60,7 @@ const UploadWidget = ({uwConfig, setPublicId, setResultUrl}) => {
             <button
                 id="upload_widget"
                 className="cloudinary-button"
-                onClick={initializeCloudinaryWidget(setResultUrl)}
+                onClick={(e)=>{e.preventDefault(); initializeCloudinaryWidget(setResultUrl)}}
             >
                 Upload
             </button>
