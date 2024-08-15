@@ -27,7 +27,14 @@ function ProgressPage() {
 
   const userData:(any) = useAppSelector((state) => state.value);
   const [locationLength, setLocationLength] = useState(0);
+  const [totalLocationsLength, setTotalLocationsLength] = useState(0);
   const [dynamicUserData, setDynamicUserData] = useState<any>(null);
+
+  useEffect(() => {
+    axios.get(`${api}/api/locations/totalCount`).then((response)=>{
+      setTotalLocationsLength(response.data.data._count.id);
+    })
+  }, []);
 
   useEffect(()=>{
     if (userData) {
@@ -40,6 +47,7 @@ function ProgressPage() {
       }
     } 
   }, [userData, dynamicUserData])
+
   return (
     <div className="main" >
       {/* <div className="progress-container">
@@ -85,7 +93,7 @@ function ProgressPage() {
                 </div>
             </div>
             <div className="progress-bar">
-                <div style={{width:"20%" }}  className="progress-bar-bg">
+                <div style={{width:`${(locationLength/totalLocationsLength)*100}%` }}  className="progress-bar-bg">
                   
                 </div>
             </div>
