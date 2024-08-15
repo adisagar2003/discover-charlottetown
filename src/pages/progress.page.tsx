@@ -68,11 +68,11 @@ function ProgressPage() {
             </div>
             <div className="progress-profile">
                 <div className="progress-profile-picture">
-                  <img src={dynamicUserData.profilePicture} alt="" />
+                  <img src={dynamicUserData?.profilePicture} alt="" />
                 </div>
                 <div className="progress-profile-contents">
                   <span className="progress-profile-name">
-                    {dynamicUserData.username}
+                    {dynamicUserData?.username}
                   </span>
                   <span>
                     {locationLength} locations visited
