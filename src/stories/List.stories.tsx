@@ -27,6 +27,7 @@ function List(props: any) {
   return (
     <div className="List-responseData">
         {responseLoading ? <ClipLoader />: null}
+
         {!responseLoading && responseData.length != 0 && responseData.map((data: { properties: { name: string; category: string; }; })=>{
             return (<div>
             <LocationMapComponent text={data.properties.name} category={data.properties.category} />

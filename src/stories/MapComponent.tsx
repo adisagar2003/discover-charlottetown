@@ -30,12 +30,15 @@ export default function MapComponent() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [dynamicUserData, setDynamicUserData] = useState(null);
+  const [dynamicDataLoaded, setDynamicDataLoaded] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   // const currentMap = useMap();
 
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
-      setLocations(res.data.data);      
+      if (res.data.data) {
+        setLocations(res.data.data);      
+      }
     });
   }, []); 
 
@@ -61,10 +64,11 @@ export default function MapComponent() {
       await axios.post(`${api}/api/visitLocation`,{
         id: location.id
       }, {withCredentials:true});    
-      updateDynamicUserData();
       window.location.reload();
     }
     catch(err) {
+      updateDynamicUserData();
+      console.log(err)  ;
       
       if (err.response.status == 300) {
         alert('Already visited location');
@@ -76,14 +80,20 @@ export default function MapComponent() {
   function updateDynamicUserData() {
     axios.get(`${api}/api/user/${userData.user.id}`).then((response)=>{
       setDynamicUserData(response.data.response);
+      console.log(response.data.response);
+      
     })
   }
   // rerender the component everytime the dynamic userData changes 
  
   useEffect(()=>{
-    console.log(dynamicUserData);
-    forceUpdate();
-  }, [dynamicUserData])
+    if (userData) {
+      updateDynamicUserData();
+      forceUpdate();
+      setDynamicDataLoaded(true);
+    }
+    
+  }, [])
 
   return (
     <div className='map-layout'>  
@@ -104,9 +114,11 @@ export default function MapComponent() {
             <div className='modal-contents'>
               <div>
                 {selectedMarker.properties.name}
+                
               </div>
               <div className='modal-category'>
                 {selectedMarker.properties.category}
+                {JSON.stringify(selectedMarker)}
               </div>
             </div>
             <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>
@@ -114,12 +126,16 @@ export default function MapComponent() {
           </ReactModal>
         )}
 
-        {locations.map((location) => {        
-            if (!dynamicUserData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (!dynamicUserData.locations) return <Marker  id={location} color='blue' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
-            if (dynamicUserData.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
-            return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
-            </Marker>
+        {locations && locations.map((location) => {   
+          // markers should paint themselves when dynamic data is loaded.
+
+            if (!userData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (dynamicDataLoaded) {
+              if (!dynamicUserData?.locations) return <Marker  id={location} color='blue' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+              if (dynamicUserData?.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+              return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
+              </Marker>
+            }   
           })}      
         </Map>
      
