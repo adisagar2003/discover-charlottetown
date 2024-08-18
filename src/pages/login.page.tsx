@@ -27,7 +27,8 @@ function LoginPage() {
                 setLoginLoading(false);
                 dispatch(login(res.data));  
                 cookies.set('token', res.data.token);
-                navigate('/');            
+                navigate('/');    
+                window.location.reload();        
             }).catch(err => {
                 if (err.response.status == 400) {
                     alert("Incorrect username or password");

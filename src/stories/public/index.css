@@ -292,6 +292,24 @@
 .sidebar-visible__button {
     display: none;
 }
+
+.sidebar-logout__button {
+    width: 80px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    background-color: rgb(224, 40, 40);
+    transition: .4s;
+}
+
+.sidebar-logout__button:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
 /* End of sidebar */
 
 /* Mobile/ Tablet view sidebar */
