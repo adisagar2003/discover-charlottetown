@@ -622,7 +622,13 @@ min-width: 50%;
 .locationMapComponent-container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    padding: 10px;
+    font-weight: 400;
+    gap: 14px;
+}
+
+.locationMapComponent-container > :nth-child(1) {
+    font-weight: 700;   
 }
 
 .List-responseData {
