@@ -62,14 +62,14 @@ function Sidebar() {
                   Dashboard
                 </div>
               </Link>
-              <Link to="/progress" className=''>
+              { userData && <Link to="/progress" className=''>
                 <div className="sidebar-icon">
                   <RiProgress3Line />
                 </div>
                 <div className="sidebar-link__text">
                   Progress
                 </div>
-              </Link>
+              </Link>}
               <Link to="/search">
                 <div className="sidebar-icon">
                   <MdSearch />

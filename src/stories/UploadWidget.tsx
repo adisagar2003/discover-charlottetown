@@ -37,9 +37,10 @@ const UploadWidget = ({uwConfig, setPublicId, setResultUrl}) => {
                         console.log("Done! Here is the image info: ", result);
                         setPublicId(result.info.public_id);
                         localStorage.setItem("profilePicture", result.info.secure_url);
-                        document.getElementById("uploadedimage")
-                        .setAttribute("src", result.info.secure_url);
                         setResultUrl(result.info.secure_url);
+                        // document.getElementById("uploadedimage")
+                        // .setAttribute("src", result.info.secure_url);
+                        // setResultUrl(result.info.secure_url);
                       }
                       else {
                         console.log(result);

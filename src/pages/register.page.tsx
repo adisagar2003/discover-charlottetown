@@ -54,7 +54,7 @@ export default function RegisterPage() {
   }, []);
 
   const registerUser = () => {
-    if (username != "" || password != "" || confirmPassword != "" || email != "") {
+    if (username != "" && password != "" && confirmPassword != "" && email != "") {
         // register user inside
         setRegisterLoading(true);
         if (password == confirmPassword) {
@@ -79,17 +79,21 @@ export default function RegisterPage() {
                     }).catch(err => {
                         if (err.response.status == 400) {
                             alert("Incorrect username or password");
+                            setRegisterLoading(false);
                         }
                     });
         
                 });
             } else {
                 alert('insert an image');
+                setRegisterLoading(false);
             }   
+            setRegisterLoading(false);
         } 
         else {
             // passwords and confirm password dont match
             alert("passwords dont match");
+            setRegisterLoading(false);
         }
     }
     else {
