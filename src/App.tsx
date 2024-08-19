@@ -10,7 +10,6 @@ import LoginPage from './pages/login.page';
 import RegisterPage from './pages/register.page';
 import { Provider } from 'react-redux'
 import store from './context/store';
-import Progress from './stories/Progress.stories';
 
 function App() : JSX.Element {
 
