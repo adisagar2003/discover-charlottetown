@@ -34,6 +34,7 @@ export default function MapComponent() {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   // const currentMap = useMap();
 
+
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       if (res.data.data) {
@@ -92,14 +93,11 @@ export default function MapComponent() {
       forceUpdate();
       setDynamicDataLoaded(true);
     }
-    
-  }, [])
+  }, []);
 
-  return (
-    <div className='map-layout'>  
-      <div className="map">
-       
-         <Map
+  function DynamicMapComponent() {
+    return (
+    <Map
           ref={mapRef}
           reuseMaps
           initialViewState={INITIAL_VIEW_STATE}
@@ -138,6 +136,95 @@ export default function MapComponent() {
             }   
           })}      
         </Map>
+    )
+  }
+
+  function NonDynamicMapComponent() {
+    return (
+    <Map
+          ref={mapRef}
+          reuseMaps
+          initialViewState={INITIAL_VIEW_STATE}
+          style={{width: 600, height: 400}}
+          mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
+        >
+        {selectedMarker && (
+          <ReactModal
+            isOpen={modalOpen}
+            className="place-modal"
+          >
+            <div className='modal-contents'>
+              <div>
+                {selectedMarker.properties.name}
+                
+              </div>
+              <div className='modal-category'>
+                {selectedMarker.properties.category}
+                {JSON.stringify(selectedMarker)}
+              </div>
+            </div>
+            <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>
+            {userData && <button className='modal-button' onClick={()=>visitLocation(selectedMarker)}>Mark as visited</button>}
+          </ReactModal>
+        )}
+
+        {locations && locations.map((location) => {   
+          // markers should paint themselves when dynamic data is loaded.
+          return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+          })}      
+        </Map>
+    )
+  }
+
+  return (
+    <div className='map-layout'>  
+      <div className="map">
+        {
+          dynamicUserData ?
+
+          <DynamicMapComponent />
+          :
+          <NonDynamicMapComponent />
+        }
+         {/* <Map
+          ref={mapRef}
+          reuseMaps
+          initialViewState={INITIAL_VIEW_STATE}
+          style={{width: 600, height: 400}}
+          mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
+        >
+        {selectedMarker && (
+          <ReactModal
+            isOpen={modalOpen}
+            className="place-modal"
+          >
+            <div className='modal-contents'>
+              <div>
+                {selectedMarker.properties.name}
+                
+              </div>
+              <div className='modal-category'>
+                {selectedMarker.properties.category}
+                {JSON.stringify(selectedMarker)}
+              </div>
+            </div>
+            <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>
+            {userData && <button className='modal-button' onClick={()=>visitLocation(selectedMarker)}>Mark as visited</button>}
+          </ReactModal>
+        )}
+
+        {locations && locations.map((location) => {   
+          // markers should paint themselves when dynamic data is loaded.
+
+            if (!userData) return <Marker  id={location} color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+            if (dynamicDataLoaded) {
+              if (!dynamicUserData?.locations) return <Marker  id={location} color='blue' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />
+              if (dynamicUserData?.locations.includes(location.id)) return (<Marker  id={location} color='green' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='bottom' />)
+              return <Marker id={location}  color='cyan' onClick={()=>markerClickEvent(location)} longitude={location.geometry.coordinates[0]} latitude={location.geometry.coordinates[1]} anchor='top' >
+              </Marker>
+            }   
+          })}      
+        </Map> */}
      
       </div>
     </div>
