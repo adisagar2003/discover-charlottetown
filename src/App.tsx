@@ -38,7 +38,6 @@ function App() : JSX.Element {
                       <Route element={<RegisterPage />} path='/register' />
                   </Routes>
                   {/* Progress route added */}
-                  <Progress />
                 </div>
               </BrowserRouter>
           </APIProvider>

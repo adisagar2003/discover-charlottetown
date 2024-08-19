@@ -16,12 +16,23 @@ function List(props: any) {
 
   useEffect(()=>{
     setResponseLoading(true);
-    axios.get(`${api}/api/locationMapSearch/${props.searchValue}`).then((response)=>{
+    if (props.searchValue != "") {
+      axios.get(`${api}/api/locationMapSearch/${props.searchValue}`).then((response)=>{
         setResponseData(response.data.response);
         setResponseLoading(false);
     }).catch(()=>{
       setResponseData(false);
     })
+    }
+    else {
+      axios.get(`${api}/api/locationMapSearch/a`).then((response)=>{
+        setResponseData(response.data.response);
+        setResponseLoading(false);
+    }).catch(()=>{
+      setResponseData(false);
+    })
+    }
+    
   },[props]);  
 
   return (
