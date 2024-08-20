@@ -29,7 +29,7 @@ function List(props: any) {
         setResponseData(response.data.response);
         setResponseLoading(false);
     }).catch(()=>{
-      setResponseData(false);
+        setResponseData(false);
     })
     }
     
