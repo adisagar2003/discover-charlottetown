@@ -43,6 +43,11 @@ function LoginPage() {
   return (
     <div className='login-layout'>
         <div className='login-card'>
+            <div className="login-credentials">
+                <span>Sample credentials:</span>
+                <span>username: user</span>
+                <span>password: password</span>
+            </div>
             <h1 className="login-heading">
                 Login
             </h1>
