@@ -44,3 +44,8 @@
     background-color: rgb(97, 97, 248);
     color: white;
 }
+
+.login-credentials {
+    display: flex;
+    flex-direction: column;
+}
