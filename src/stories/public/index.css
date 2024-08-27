@@ -413,6 +413,13 @@
     color: white;
 }
 
+@media screen and (max-width: 500px) {
+    .map-layout {
+        background-color: rgb(221, 221, 221);
+        width: 100vw;
+    }
+}
+
 /* Searchbar starts here */
 .searchbar-container {
     display: flex;
@@ -647,3 +654,4 @@ min-width: 50%;
 ::-webkit-scrollbar-button {
     display: none;
 }
+

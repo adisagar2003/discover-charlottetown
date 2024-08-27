@@ -156,11 +156,9 @@ export default function MapComponent() {
             <div className='modal-contents'>
               <div>
                 {selectedMarker.properties.name}
-                
               </div>
               <div className='modal-category'>
                 {selectedMarker.properties.category}
-                {JSON.stringify(selectedMarker)}
               </div>
             </div>
             <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>
