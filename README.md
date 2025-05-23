@@ -14,6 +14,7 @@ A full-stack tourism companion app built for locals and newcomers in Charlotteto
 - **Frontend:** React.js, TailwindCSS, React Router
 - **Maps & Location:** Leaflet.js, Geolocation API
 - **Backend:** Node.js, Express.js
+- [**Backend Repo**](https://github.com/adisagar2003/discover-ctown-server)
 - **Database:** MongoDB (with Mongoose)
 
 ##
