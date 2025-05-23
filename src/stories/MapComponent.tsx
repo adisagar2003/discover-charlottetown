@@ -10,19 +10,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useSelector } from 'react-redux';
 import type {MapRef} from 'react-map-gl/maplibre';
 import ReactModal from "react-modal";
-// function DeckGLOverlay(props: DeckProps) {
-//   const map = useMap();
-//   const overlay = useMemo(() => new GoogleMapsOverlay(props));
 
-//   // set the overlays
-//   useEffect(() => {
-//     if (!overlay) return null;
-//     overlay.setMap(map);    
-//     overlay.setProps(props);  
-//   }, [map]);
-
-//   return null;
-// }
 export default function MapComponent() {
 
   const [locations, setLocations] = useState([]);
@@ -32,9 +20,7 @@ export default function MapComponent() {
   const [dynamicUserData, setDynamicUserData] = useState(null);
   const [dynamicDataLoaded, setDynamicDataLoaded] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  // const currentMap = useMap();
-
-
+  
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       if (res.data.data) {
@@ -53,13 +39,11 @@ export default function MapComponent() {
   // load user data
   const userData = useSelector(state=>state.value);
 
-  // onClick marker 
   const markerClickEvent = (location) => {
     setModalOpen(true);
     setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties, id: location.id })
   }
 
-  // visit Location
   const visitLocation = async (location) => {
     try {
       await axios.post(`${api}/api/visitLocation`,{
@@ -85,8 +69,8 @@ export default function MapComponent() {
       
     })
   }
+  
   // rerender the component everytime the dynamic userData changes 
- 
   useEffect(()=>{
     if (userData) {
       updateDynamicUserData();
@@ -116,7 +100,6 @@ export default function MapComponent() {
               </div>
               <div className='modal-category'>
                 {selectedMarker.properties.category}
-                {JSON.stringify(selectedMarker)}
               </div>
             </div>
             <button className='modal-button close' onClick={()=>setModalOpen(false)}>Close Modal</button>

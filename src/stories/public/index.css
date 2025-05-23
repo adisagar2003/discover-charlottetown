@@ -376,26 +376,39 @@
 
 /* Map Modal component */
 .place-modal {
-    
+    position: relative;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+
 }
 
 .modal-contents {
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 20px;
 }
 
 .modal-contents > :nth-child(1) {
     font-weight: 700;
     font-size: 25px;
+    margin-left: 10px;
+    margin-top: 50px;
 }
 
 .modal-button {
     border: none;   
-    padding: 5px;
+    padding: 20px;
     background-color: rgb(82, 82, 246);
     color: white;
     font-weight: 700;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 .modal-button.close {
@@ -409,6 +422,8 @@
     border-radius: 4px;
     background-color: rgb(123, 114, 255);
     width: fit-content;
+    margin-left: 10px;
+    padding-left: 10px;
     font-weight: 700;
     color: white;
 }
