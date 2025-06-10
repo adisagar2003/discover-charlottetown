@@ -205,35 +205,49 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-lg);
+    overflow: hidden;
 }
 
 .sidebar-content__profile-picture {
     width: 50px;
     height: 50px;
+    min-width: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: var(--spacing-md);
     border: 2px solid var(--text-light);
+    position: relative;
+    flex-shrink: 0;
 }
 
 .sidebar-content__profile-picture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
 .sidebar-content__username-email {
     color: var(--text-light);
+    min-width: 0;
+    flex: 1;
 }
 
 .sidebar-content__username-email h2 {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar-content__username-email span {
     font-size: 0.9rem;
     opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 /* Notification Badge */
@@ -398,6 +412,7 @@ body {
     box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg, rgba(26, 35, 126, 0.05) 0%, rgba(13, 71, 161, 0.05) 100%);
 }
 
 /* Map Component */
@@ -413,6 +428,9 @@ body {
     border-radius: var(--radius-lg);
     padding: var(--spacing-md);
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .map {
@@ -424,19 +442,27 @@ body {
     position: relative;
     background-color: var(--background);
     border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Map Controls */
 .mapboxgl-ctrl-group {
-    background-color: var(--background) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
     border-radius: var(--radius-md) !important;
     box-shadow: var(--shadow-md) !important;
     overflow: hidden;
     z-index: 9998 !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .mapboxgl-ctrl-group button {
-    background-color: var(--background) !important;
+    background-color: transparent !important;
     color: var(--primary-dark) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
     transition: var(--transition) !important;
@@ -452,10 +478,12 @@ body {
     cursor: pointer;
     transition: var(--transition);
     z-index: 9997 !important;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .mapboxgl-marker:hover {
     transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 /* Modal Styles */

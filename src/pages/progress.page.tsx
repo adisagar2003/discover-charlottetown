@@ -5,6 +5,9 @@ import { useAppSelector } from "../context/store";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../utils/api";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { MdLocationOn, MdEmojiEvents } from 'react-icons/md';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,6 +32,7 @@ function ProgressPage() {
   const [locationLength, setLocationLength] = useState(0);
   const [totalLocationsLength, setTotalLocationsLength] = useState(0);
   const [dynamicUserData, setDynamicUserData] = useState<any>(null);
+  const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
     axios.get(`${api}/api/locations/totalCount`).then((response)=>{
@@ -48,6 +52,13 @@ function ProgressPage() {
     } 
   }, [userData, dynamicUserData]);
 
+  useEffect(() => {
+    if (totalLocationsLength > 0 && locationLength > 0) {
+      const calculatedPercentage = Math.round((locationLength / totalLocationsLength) * 100);
+      setPercentage(calculatedPercentage);
+    }
+  }, [locationLength, totalLocationsLength]);
+
   return (
     <div className="main" >
       {/* <div className="progress-container">
@@ -64,39 +75,51 @@ function ProgressPage() {
         </div>
       </div> */}
       <div className="progress-container">
-        <div className="progress-content">
-          <div className="progress-activity">
-            <div className="progress-heading">
-                <span>
-                  Activity
-                </span>
-                <span className="year">
-                  2024  
-                </span>
+        <div className="progress-activity">
+          <div className="progress-heading">
+            <span>Your Progress</span>
+            <span className="year">2024</span>
+          </div>
+          
+          <div className="progress-profile">
+            <div className="progress-profile-picture">
+              <img src={dynamicUserData?.profilePicture} alt="Profile" />
             </div>
-            <div className="progress-profile">
-                <div className="progress-profile-picture">
-                  <img src={dynamicUserData?.profilePicture} alt="" />
-                </div>
-                <div className="progress-profile-contents">
-                  <span className="progress-profile-name">
-                    {dynamicUserData?.username}
-                  </span>
-                  <span>
-                    {locationLength} locations visited
-                  </span>
-                </div>  
-                <div className="progress-analytics">
-                  <div className="progress-bar">
-        
-                  </div>
-                </div>
+            <div className="progress-profile-contents">
+              <span className="progress-profile-name">
+                {dynamicUserData?.username}
+              </span>
+              <span>
+                <MdLocationOn style={{ verticalAlign: 'middle', marginRight: '4px' }} />
+                {locationLength} locations visited
+              </span>
+              <span>
+                <MdEmojiEvents style={{ verticalAlign: 'middle', marginRight: '4px' }} />
+                {percentage}% of Charlottetown explored
+              </span>
             </div>
-            <div className="progress-bar">
-                <div style={{width:`${(locationLength/totalLocationsLength)*100}%` }}  className="progress-bar-bg">
-                  
-                </div>
-            </div>
+          </div>
+
+          <div style={{ width: '200px', margin: '0 auto', marginBottom: '2rem' }}>
+            <CircularProgressbar
+              value={percentage}
+              text={`${percentage}%`}
+              styles={buildStyles({
+                pathColor: `rgba(66, 153, 225, ${percentage / 100})`,
+                textColor: '#fff',
+                trailColor: 'rgba(255, 255, 255, 0.1)',
+                strokeLinecap: 'round',
+                textSize: '16px',
+                pathTransitionDuration: 0.5,
+              })}
+            />
+          </div>
+
+          <div className="progress-bar">
+            <div 
+              style={{width: `${percentage}%`}} 
+              className="progress-bar-bg"
+            />
           </div>
         </div>
       </div>

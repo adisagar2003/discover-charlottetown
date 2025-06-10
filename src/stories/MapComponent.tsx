@@ -107,7 +107,7 @@ export default function MapComponent() {
           ref={mapRef}
           reuseMaps
           initialViewState={INITIAL_VIEW_STATE}
-          style={{width: 600, height: 400}}
+          style={{width: '100%', height: '100%'}}
           mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq"
         >
         {selectedMarker && (
@@ -154,8 +154,8 @@ export default function MapComponent() {
           ref={mapRef}
           reuseMaps
           initialViewState={INITIAL_VIEW_STATE}
-          style={{width: 600, height: 400}}
-          mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq	"
+          style={{width: '100%', height: '100%'}}
+          mapStyle="https://api.maptiler.com/maps/streets/style.json?key=MOTv2gvrmXi0GVdMgKRq"
         >
         {selectedMarker && (
           <ReactModal
