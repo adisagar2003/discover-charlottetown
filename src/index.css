@@ -75,6 +75,9 @@ body {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Add subtle pattern overlay */
@@ -129,14 +132,39 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    overflow-y: auto;
+    padding-right: var(--spacing-sm);
+    flex: 1;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-md) 0;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .sidebar-logo {
     width: 100%;
-    max-width: 290px;
+    max-width: 250px;
     height: auto;
     aspect-ratio: 205/55;
-    margin: 0 auto var(--spacing-xl);
+    margin: 0 auto var(--spacing-lg);
     background-color: white;
     border-radius: var(--radius-lg);
     padding: var(--spacing-xs);
@@ -155,18 +183,19 @@ body {
 /* Sidebar Links */
 .sidebar-content__links {
     width: 100%;
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-md);
+    flex-shrink: 0;
 }
 
 .sidebar-content__links a {
     display: flex;
     align-items: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     color: var(--text-light);
     text-decoration: none;
     border-radius: var(--radius-md);
     transition: var(--transition);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     width: 100%;
 }
 
@@ -179,17 +208,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    margin-right: var(--spacing-md);
+    width: 32px;
+    height: 32px;
+    margin-right: var(--spacing-sm);
     color: var(--text-light);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     flex-shrink: 0;
 }
 
 .sidebar-link__text {
     color: var(--text-light);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     flex-grow: 1;
 }
@@ -199,22 +228,23 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .sidebar-content__profile-picture {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: var(--spacing-md);
+    margin-right: var(--spacing-sm);
     border: 2px solid var(--text-light);
     position: relative;
     flex-shrink: 0;
@@ -227,22 +257,16 @@ body {
     object-position: center;
 }
 
-.sidebar-content__username-email {
-    color: var(--text-light);
-    min-width: 0;
-    flex: 1;
-}
-
 .sidebar-content__username-email h2 {
-    font-size: 1.1rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
+    margin-bottom: 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .sidebar-content__username-email span {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.9;
     white-space: nowrap;
     overflow: hidden;
@@ -253,36 +277,38 @@ body {
 /* Notification Badge */
 .sidebar-notification-number {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -4px;
+    right: -4px;
     background-color: var(--error);
     color: var(--text-light);
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: bold;
 }
 
 /* Logout Button */
 .sidebar-logout__button {
     width: 100%;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     background-color: var(--error);
     color: var(--text-light);
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: var(--transition);
-    margin-top: var(--spacing-md);
+    margin-top: auto;
+    margin-bottom: var(--spacing-sm);
     text-align: left;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .sidebar-logout__button:hover {
