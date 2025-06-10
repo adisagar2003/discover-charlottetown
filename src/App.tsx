@@ -13,13 +13,6 @@ import store from './context/store';
 
 function App() : JSX.Element {
 
-  let apiKey : (string|undefined) = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
-  if (apiKey === undefined) {
-    apiKey="";
-  }
-
-  
   return (
     <>
       <Provider store={store}> 
@@ -36,7 +29,6 @@ function App() : JSX.Element {
                       <Route element={<LoginPage />} path='/login' />
                       <Route element={<RegisterPage />} path='/register' />
                   </Routes>
-                  {/* Progress route added */}
                 </div>
               </BrowserRouter>
           </APIProvider>

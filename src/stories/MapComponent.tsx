@@ -21,6 +21,10 @@ export default function MapComponent() {
   const [dynamicDataLoaded, setDynamicDataLoaded] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   
+
+  
+  // Fetches initial location data from the API
+  // Response contains an array of location objects with coordinates and properties
   useEffect(()=>{
     axios.get(`${api}/api/locationMap/20`).then((res)=>{
       if (res.data.data) {
@@ -44,6 +48,7 @@ export default function MapComponent() {
     setSelectedMarker({latitude: location.geometry.coordinates[0], longitude: location.geometry.coordinates[1], properties: location.properties, id: location.id })
   }
 
+  // user specific, user visits location.
   const visitLocation = async (location) => {
     try {
       await axios.post(`${api}/api/visitLocation`,{
