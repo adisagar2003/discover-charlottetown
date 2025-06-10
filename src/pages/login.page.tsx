@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../context/store";
 import Cookies from 'universal-cookie';
+import { userService } from "../services/userService";
 
 function LoginPage() {
   const cookies = new Cookies();
@@ -16,14 +17,11 @@ function LoginPage() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // login using api
+
   const loginUser = () => {
         if (username!= "" || password != "") {
             setLoginLoading(true);
-            axios.post(`${api}/api/auth/login`, {
-                "username": username,
-                "password": password
-            }).then((res)=>{
+            userService.loginUser({username,password}).then((res)=>{
                 setLoginLoading(false);
                 dispatch(login(res.data));  
                 cookies.set('token', res.data.token);
