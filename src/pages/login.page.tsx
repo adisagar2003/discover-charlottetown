@@ -19,22 +19,27 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const loginUser = () => {
-        if (username!= "" || password != "") {
+        if (username !== "" && password !== "") {
             setLoginLoading(true);
-            userService.loginUser({username,password}).then((res)=>{
-                setLoginLoading(false);
-                dispatch(login(res.data));  
-                cookies.set('token', res.data.token);
-                navigate('/');    
-                window.location.reload();        
-            }).catch(err => {
-                if (err.response.status == 400) {
-                    alert("Incorrect username or password");
+            userService.loginUser({username, password})
+                .then((res) => {
+                    dispatch(login(res.data));  
+                    cookies.set('token', res.data.token);
+                    navigate('/');    
+                    window.location.reload();        
+                })
+                .catch(err => {
+                    if (err.response?.status === 400) {
+                        alert("Incorrect username or password");
+                    } else {
+                        alert("An error occurred. Please try again.");
+                    }
+                })
+                .finally(() => {
                     setLoginLoading(false);
-                }
-            });
-
-            setLoginLoading(false)
+                });
+        } else {
+            alert("Please enter both username and password");
         }
   }
 
