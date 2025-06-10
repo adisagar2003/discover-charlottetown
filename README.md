@@ -19,6 +19,7 @@ A full-stack tourism companion app built for locals and newcomers in Charlotteto
 
 ##
 
-![image](https://github.com/user-attachments/assets/3f788ed3-8d86-4975-bc56-c4815911d882)
+![image](https://github.com/user-attachments/assets/6323ba00-96c6-46bc-ba0a-21e1c21d66e3)
+
 
 
