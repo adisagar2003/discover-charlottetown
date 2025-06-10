@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 
-
-
-
-const useDebounce = (value: unknown, delay = 500) => {
-        
-    const [debouncedValue, setDebouncedValue] = useState(value);
+export default function useDebounce<T>(value: T, delay: number = 500): { debouncedValue: T; isCleaning: boolean } {
+    const [debouncedValue, setDebouncedValue] = useState<T>(value);
+    const [isCleaning, setIsCleaning] = useState(false);
 
     useEffect(() => {
-        const id = setTimeout(()=>{
-            console.log('setting timeout');
-            setDebouncedValue(value)
+        setIsCleaning(true);
+        const timer = setTimeout(() => {
+            setDebouncedValue(value);
+            setIsCleaning(false);
         }, delay);
-        return () => {console.log('clear timeout');
-         clearTimeout(id)};
-    }, [value, delay]);
-    
-  return  debouncedValue
-}
 
-export default useDebounce
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [value, delay]);
+
+    return { debouncedValue, isCleaning };
+}
