@@ -8,19 +8,19 @@
 /* CSS Variables */
 :root {
     /* Colors */
-    --primary-dark: #1a365d;    /* Dark blue */
-    --primary: #2b6cb0;         /* Medium blue */
-    --primary-light: #4299e1;   /* Light blue */
-    --accent: #63b3ed;          /* Accent blue */
-    --gradient-start: #1a365d;  /* Dark blue */
-    --gradient-end: #2c5282;    /* Slightly lighter blue */
-    --background: #ffffff;      /* White background */
-    --text-dark: #1a202c;       /* Darker text for better contrast */
-    --text-light: #ffffff;      /* Light text */
-    --error: #e53e3e;           /* Error red */
-    --success: #48bb78;         /* Success green */
-    --modal-bg: #ffffff;        /* Modal background */
-    --modal-text: #1a202c;      /* Modal text color */
+    --primary-dark: #1a365d;    
+    --primary: #2b6cb0;        
+    --primary-light: #4299e1;   
+    --accent: #63b3ed;          
+    --gradient-start: #1a365d; 
+    --gradient-end: #2c5282;  
+    --background: #ffffff;     
+    --text-dark: #1a202c;      
+    --text-light: #ffffff;      
+    --error: #e53e3e;           
+    --success: #48bb78;         
+    --modal-bg: #ffffff;        
+    --modal-text: #1a202c;      
 
     /* Spacing */
     --spacing-xs: 0.25rem;
