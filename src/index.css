@@ -1026,3 +1026,32 @@ body {
         padding: var(--spacing-sm);
     }
 }
+
+/* No Results State */
+.no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.no-results-container .sad-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-light);
+}
+
+.no-results-container h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.no-results-container p {
+    font-size: 1rem;
+    opacity: 0.8;
+}

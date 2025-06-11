@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { ClipLoader } from "react-spinners";
 import LocationMapComponent from "./LocationMapComponent";
 import { locationService } from "../services/locationService";
+import { MdSentimentDissatisfied } from "react-icons/md";
 
 interface LocationData {
     properties: {
@@ -22,7 +23,6 @@ function List({ searchValue, isDebounceCleaning }: ListProps) {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-
         if (isDebounceCleaning) {
             setResponseData([]);
             return;
@@ -56,6 +56,12 @@ function List({ searchValue, isDebounceCleaning }: ListProps) {
             {responseLoading ? (
                 <div className="loading-container">
                     <ClipLoader />
+                </div>
+            ) : responseData.length === 0 ? (
+                <div className="no-results-container">
+                    <MdSentimentDissatisfied className="sad-icon" />
+                    <h2>No Results Found</h2>
+                    <p>Try searching for something else</p>
                 </div>
             ) : (
                 responseData.map((data) => (
