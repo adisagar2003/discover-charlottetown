@@ -46,7 +46,7 @@ export default function RegisterPage() {
 //     }
 //   });
   
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
 //   const myImage = cld.image(publicId);
 
   useEffect(()=> {

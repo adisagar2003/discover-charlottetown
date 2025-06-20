@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useEffect, useState } from "react"
 import { ClipLoader } from "react-spinners";
 import LocationMapComponent from "./LocationMapComponent";

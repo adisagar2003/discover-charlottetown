@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { useEffect, createContext, useState, useRef } from "react";
+import { useEffect, createContext, useState, useRef, useCallback } from "react";
 import "./UploadWidget.css";
 import { MdCloudUpload } from "react-icons/md";
 
@@ -29,24 +29,20 @@ const UploadWidget = ({ uwConfig, setPublicId, setResultUrl }: UploadWidgetProps
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const widgetRef = useRef(null);
 
-    // Initialize the widget when the script is loaded
-    useEffect(() => {
-        initializeCloudinaryScript();
-    }, [loaded]);
+    // Create and load Cloudinary script
+    const createCloudinaryScript = useCallback(() => {
+        const script = document.createElement("script");
+        script.setAttribute("async", "");
+        script.setAttribute("id", "uw");
+        script.src = "https://upload-widget.cloudinary.com/global/all.js";
+        script.addEventListener("load", () => {
+            setLoaded(true);
+            createUploadWidget();
+        });
+        document.body.appendChild(script);
+    }, [createUploadWidget]);
 
-    const handleUploadSuccess = (result: CloudinaryResult) => {
-        console.log("Upload successful:", result);
-        setPublicId(result.info.public_id);
-        localStorage.setItem("profilePicture", result.info.secure_url);
-        setResultUrl(result.info.secure_url);
-        setPreviewUrl(result.info.secure_url);
-    };
-
-    const handleUploadError = (error: any) => {
-        console.log("Upload error:", error);
-    };
-
-    const createUploadWidget = () => {
+    const createUploadWidget = useCallback(() => {
         if (loaded && !widgetRef.current) {
             widgetRef.current = window.cloudinary.createUploadWidget(
                 uwConfig,
@@ -59,16 +55,21 @@ const UploadWidget = ({ uwConfig, setPublicId, setResultUrl }: UploadWidgetProps
                 }
             );
         }
-    };
+    }, [loaded, uwConfig, handleUploadSuccess, handleUploadError]);
 
-    const handleUploadClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        if (loaded && widgetRef.current) {
-            widgetRef.current.open();
-        }
-    };
+    const handleUploadSuccess = useCallback((result: CloudinaryResult) => {
+        console.log("Upload successful:", result);
+        setPublicId(result.info.public_id);
+        localStorage.setItem("profilePicture", result.info.secure_url);
+        setResultUrl(result.info.secure_url);
+        setPreviewUrl(result.info.secure_url);
+    }, [setPublicId, setResultUrl]);
 
-    const initializeCloudinaryScript = () => {
+    const handleUploadError = useCallback((error: any) => {
+        console.log("Upload error:", error);
+    }, []);
+
+    const initializeCloudinaryScript = useCallback(() => {
         const uwScript = document.getElementById("uw");
         if (!uwScript) {
             createCloudinaryScript();
@@ -76,19 +77,18 @@ const UploadWidget = ({ uwConfig, setPublicId, setResultUrl }: UploadWidgetProps
             setLoaded(true);
             createUploadWidget();
         }
-    };
+    }, [createCloudinaryScript, createUploadWidget]);
 
-    // Create and load Cloudinary script
-    const createCloudinaryScript = () => {
-        const script = document.createElement("script");
-        script.setAttribute("async", "");
-        script.setAttribute("id", "uw");
-        script.src = "https://upload-widget.cloudinary.com/global/all.js";
-        script.addEventListener("load", () => {
-            setLoaded(true);
-            createUploadWidget();
-        });
-        document.body.appendChild(script);
+    // Initialize the widget when the script is loaded
+    useEffect(() => {
+        initializeCloudinaryScript();
+    }, [initializeCloudinaryScript]);
+
+    const handleUploadClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (loaded && widgetRef.current) {
+            widgetRef.current.open();
+        }
     };
 
     // Render preview image or placeholder

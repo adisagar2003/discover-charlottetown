@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-use-before-define */
+ 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { useEffect, useState, useRef, useReducer } from 'react';
-import axios from 'axios';
-import api from '../utils/api';
 import Map, { Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useSelector } from 'react-redux';
@@ -12,7 +10,6 @@ import type {MapRef} from 'react-map-gl/maplibre';
 import ReactModal from "react-modal";
 import { useInView } from 'react-intersection-observer';
 import { mapService } from '../services/mapService';
-
 
 export default function MapComponent() {
   // Add useInView hook
@@ -45,7 +42,7 @@ export default function MapComponent() {
     }
   }, [inView]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   const INITIAL_VIEW_STATE={
     latitude: 46.235177898487095,
     longitude: -63.12670440273208,

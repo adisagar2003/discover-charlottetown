@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./login.page.css";
 import { FadeLoader } from "react-spinners";
-import api from "../utils/api";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../context/store";

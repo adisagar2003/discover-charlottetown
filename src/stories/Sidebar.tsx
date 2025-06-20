@@ -23,7 +23,7 @@ function Sidebar() {
           setDynamicUserData(response.data.response);
       });
     }
-  }, []);
+  }, [userData]);
 
   return (
     <>
