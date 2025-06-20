@@ -1,4 +1,3 @@
-import React from 'react';
 import Map from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { INITIAL_VIEW_STATE } from '../utils/mapData';
