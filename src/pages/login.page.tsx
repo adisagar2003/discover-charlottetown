@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./login.page.css";
 import { FadeLoader } from "react-spinners";
-import api from "../utils/api";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../context/store";
 import Cookies from 'universal-cookie';
+import { userService } from "../services/userService";
 
 function LoginPage() {
   const cookies = new Cookies();
@@ -16,27 +15,29 @@ function LoginPage() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // login using api
-  const loginUser = () => {
-        if (username!= "" || password != "") {
-            setLoginLoading(true);
-            axios.post(`${api}/api/auth/login`, {
-                "username": username,
-                "password": password
-            }).then((res)=>{
-                setLoginLoading(false);
-                dispatch(login(res.data));  
-                cookies.set('token', res.data.token);
-                navigate('/');    
-                window.location.reload();        
-            }).catch(err => {
-                if (err.response.status == 400) {
-                    alert("Incorrect username or password");
-                    setLoginLoading(false);
-                }
-            });
 
-            setLoginLoading(false)
+  const loginUser = () => {
+        if (username !== "" && password !== "") {
+            setLoginLoading(true);
+            userService.loginUser({username, password})
+                .then((res) => {
+                    dispatch(login(res.data));  
+                    cookies.set('token', res.data.token);
+                    navigate('/');    
+                    window.location.reload();        
+                })
+                .catch(err => {
+                    if (err.response?.status === 400) {
+                        alert("Incorrect username or password");
+                    } else {
+                        alert("An error occurred. Please try again.");
+                    }
+                })
+                .finally(() => {
+                    setLoginLoading(false);
+                });
+        } else {
+            alert("Please enter both username and password");
         }
   }
 

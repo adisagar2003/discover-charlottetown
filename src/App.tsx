@@ -10,16 +10,10 @@ import LoginPage from './pages/login.page';
 import RegisterPage from './pages/register.page';
 import { Provider } from 'react-redux'
 import store from './context/store';
+import AdminAddLocation from './pages/adminAddLocation.page';
 
 function App() : JSX.Element {
 
-  let apiKey : (string|undefined) = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
-  if (apiKey === undefined) {
-    apiKey="";
-  }
-
-  
   return (
     <>
       <Provider store={store}> 
@@ -35,8 +29,8 @@ function App() : JSX.Element {
                       <Route element={<NotificationPage />} path='/notifications' />
                       <Route element={<LoginPage />} path='/login' />
                       <Route element={<RegisterPage />} path='/register' />
+                      <Route element={<AdminAddLocation />} path='/admin/addLocation' />
                   </Routes>
-                  {/* Progress route added */}
                 </div>
               </BrowserRouter>
           </APIProvider>

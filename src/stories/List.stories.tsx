@@ -1,52 +1,80 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useEffect, useState } from "react"
-import api from "../utils/api";
-import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import LocationMapComponent from "./LocationMapComponent";
+import { locationService } from "../services/locationService";
+import { MdSentimentDissatisfied } from "react-icons/md";
 
-function List(props: any) {
-  
-  const [responseData, setResponseData] = useState<any>([]);
-  const [responseLoading, setResponseLoading] = useState(false);
+interface LocationData {
+    properties: {
+        name: string;
+        category: string;
+    };
+}
 
-  useEffect(()=> {
-    setResponseLoading(false);
-  }, []);
+interface ListProps {
+    searchValue: string;
+    isDebounceCleaning: boolean;
+}
 
-  useEffect(()=>{
-    setResponseLoading(true);
-    if (props.searchValue != "") {
-      axios.get(`${api}/api/locationMapSearch/${props.searchValue}`).then((response)=>{
-        setResponseData(response.data.response);
-        setResponseLoading(false);
-    }).catch(()=>{
-      setResponseData(false);
-    })
+function List({ searchValue, isDebounceCleaning }: ListProps) {
+    const [responseData, setResponseData] = useState<LocationData[]>([]);
+    const [responseLoading, setResponseLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (isDebounceCleaning) {
+            setResponseData([]);
+            return;
+        }
+
+        const fetchLocations = async () => {
+            setResponseLoading(true);
+            setError(null);
+            
+            try {
+                const data = searchValue 
+                    ? await locationService.searchLocations(searchValue)
+                    : await locationService.getDefaultLocations();
+                setResponseData(data);
+            } catch (err) {
+                setError('Failed to fetch locations');
+            } finally {
+                setResponseLoading(false);
+            }
+        };
+
+        fetchLocations();
+    }, [searchValue, isDebounceCleaning]);
+
+    if (error) {
+        return <div className="error-message">{error}</div>;
     }
-    else {
-      axios.get(`${api}/api/locationMapSearch/a`).then((response)=>{
-        setResponseData(response.data.response);
-        setResponseLoading(false);
-    }).catch(()=>{
-        setResponseData(false);
-    })
-    }
-    
-  },[props]);  
 
-  return (
-    <div className="List-responseData">
-        {responseLoading ? <ClipLoader />: null}
-
-        {!responseLoading && responseData.length != 0 && responseData.map((data: { properties: { name: string; category: string; }; })=>{
-            return (<div>
-            <LocationMapComponent text={data.properties.name} category={data.properties.category} />
-            </div>)
-        })}
-        
-    </div>
-  )
+    return (
+        <div className="List-responseData">
+            {responseLoading ? (
+                <div className="loading-container">
+                    <ClipLoader />
+                </div>
+            ) : responseData.length === 0 ? (
+                <div className="no-results-container">
+                    <MdSentimentDissatisfied className="sad-icon" />
+                    <h2>No Results Found</h2>
+                    <p>Try searching for something else</p>
+                </div>
+            ) : (
+                responseData.map((data) => (
+                    <div key={data.properties.name}>
+                        <LocationMapComponent 
+                            text={data.properties.name} 
+                            category={data.properties.category} 
+                        />
+                    </div>
+                ))
+            )}
+        </div>
+    );
 }
 
 export default List
